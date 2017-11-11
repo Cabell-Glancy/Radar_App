@@ -9,15 +9,29 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+private let kMessageAnnotationName = "kMessageAnnotationName"
+
+class MapViewController: UIViewController, MKMapViewDelegate, MessageDetailMapViewDelegate {
+    func detailsRequestedForMessage(message: Message) {
+    }
+    
 
     @IBOutlet weak var mapView: MKMapView!
+    
+    var selectedMessage: Message?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mapView.showsUserLocation = true
         mapView.delegate = self
+        
+        let message = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: mapView.userLocation.coordinate.latitude, longitude: mapView.userLocation.coordinate.longitude))
+        
+        let messageAnnotation = MessageAnnotation(message: message)
+        
+        print("++++++++++++++++++++++" + String(describing: messageAnnotation.coordinate))
+        mapView.addAnnotation(messageAnnotation)
         
     }
 
@@ -31,9 +45,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         mapView.setRegion(region, animated: true)
-        
     }
-
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: kMessageAnnotationName)
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: kMessageAnnotationName)
+            //(annotationView as! MessageAnnotationView).messageDetailDelegate = self
+        } else {
+            annotationView!.annotation = annotation
+        }
+        return annotationView
+    }
 
 }
 
