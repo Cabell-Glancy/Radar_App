@@ -10,11 +10,13 @@ import Foundation
 import MapKit
 
 class MessageAnnotation: NSObject, MKAnnotation {
+    var title: String?
     var message: Message
     var coordinate: CLLocationCoordinate2D { return message.location }
     
     init(message: Message) {
         self.message = message
+        self.title = message.filter.rawValue
         super.init()
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */; };
 		3F7BB7921FA6365D0014DF9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7911FA6365D0014DF9D /* AppDelegate.swift */; };
 		3F7BB7941FA6365D0014DF9D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7931FA6365D0014DF9D /* MapViewController.swift */; };
 		3F7BB7971FA6365D0014DF9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7BB7951FA6365D0014DF9D /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotationView.swift; sourceTree = "<group>"; };
 		3F7BB78E1FA6365D0014DF9D /* Radar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7BB7911FA6365D0014DF9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F7BB7931FA6365D0014DF9D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				3FA4F52B1FB6423A004BD92B /* Message.swift */,
 				3FA4F52D1FB643AF004BD92B /* Filter.swift */,
 				3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */,
+				3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */,
 			);
 			path = Radar;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7BB7941FA6365D0014DF9D /* MapViewController.swift in Sources */,
+				3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */,
 				3FA4F52E1FB643AF004BD92B /* Filter.swift in Sources */,
 				3FA4F53B1FB6638E004BD92B /* UIView+BezierPaths.swift in Sources */,
 				3FA4F52C1FB6423A004BD92B /* Message.swift in Sources */,
