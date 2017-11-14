@@ -79,7 +79,7 @@
         <scene sceneID="y54-PU-5zW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3UR-LG-cx7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Saved" id="505-GJ-UgL"/>
+                    <tabBarItem key="tabBarItem" title="Saved" selectedImage="mapPin" id="505-GJ-UgL"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="H3s-Xk-3C0">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -184,4 +184,7 @@
             <point key="canvasLocation" x="-26" y="1672"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mapPin" width="30" height="30"/>
+    </resources>
 </document>

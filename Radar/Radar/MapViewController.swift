@@ -11,10 +11,7 @@ import MapKit
 
 private let kMessageAnnotationName = "kMessageAnnotationName"
 
-class MapViewController: UIViewController, MKMapViewDelegate, MessageDetailMapViewDelegate {
-    func detailsRequestedForMessage(message: Message) {
-    }
-    
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -51,15 +48,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, MessageDetailMapVi
         if annotation is MKUserLocation {
             return nil
         }
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: kMessageAnnotationName)
         
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: kMessageAnnotationName)
-            //(annotationView as! MessageAnnotationView).messageDetailDelegate = self
-        } else {
-            annotationView!.annotation = annotation
+        else {
+            let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "annotationView") ?? MKAnnotationView()
+            annotationView.image = UIImage(named: "mapPin")
+            return annotationView
         }
-        return annotationView
     }
 
 }

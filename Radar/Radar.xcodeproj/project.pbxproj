@@ -19,8 +19,6 @@
 		3FA4F52C1FB6423A004BD92B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F52B1FB6423A004BD92B /* Message.swift */; };
 		3FA4F52E1FB643AF004BD92B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F52D1FB643AF004BD92B /* Filter.swift */; };
 		3FA4F5321FB65274004BD92B /* MessageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */; };
-		3FA4F5341FB653A1004BD92B /* MessageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F5331FB653A1004BD92B /* MessageAnnotationView.swift */; };
-		3FA4F5391FB66016004BD92B /* MessageDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F5381FB66016004BD92B /* MessageDetailMapView.swift */; };
 		3FA4F53B1FB6638E004BD92B /* UIView+BezierPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F53A1FB6638E004BD92B /* UIView+BezierPaths.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,9 +58,6 @@
 		3FA4F52B1FB6423A004BD92B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3FA4F52D1FB643AF004BD92B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotation.swift; sourceTree = "<group>"; };
-		3FA4F5331FB653A1004BD92B /* MessageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotationView.swift; sourceTree = "<group>"; };
-		3FA4F5371FB65F72004BD92B /* MessageDetailMapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageDetailMapView.xib; sourceTree = "<group>"; };
-		3FA4F5381FB66016004BD92B /* MessageDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailMapView.swift; sourceTree = "<group>"; };
 		3FA4F53A1FB6638E004BD92B /* UIView+BezierPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+BezierPaths.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,9 +122,6 @@
 				3FA4F52B1FB6423A004BD92B /* Message.swift */,
 				3FA4F52D1FB643AF004BD92B /* Filter.swift */,
 				3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */,
-				3FA4F5331FB653A1004BD92B /* MessageAnnotationView.swift */,
-				3FA4F5381FB66016004BD92B /* MessageDetailMapView.swift */,
-				3FA4F5371FB65F72004BD92B /* MessageDetailMapView.xib */,
 			);
 			path = Radar;
 			sourceTree = "<group>";
@@ -306,8 +298,6 @@
 				3F7BB79A1FA6365D0014DF9D /* Radar.xcdatamodeld in Sources */,
 				3FA4F5321FB65274004BD92B /* MessageAnnotation.swift in Sources */,
 				3F7BB7921FA6365D0014DF9D /* AppDelegate.swift in Sources */,
-				3FA4F5341FB653A1004BD92B /* MessageAnnotationView.swift in Sources */,
-				3FA4F5391FB66016004BD92B /* MessageDetailMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
