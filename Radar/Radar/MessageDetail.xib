@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MessageDetail" customModule="Radar">
+            <rect key="frame" x="0.0" y="0.0" width="228" height="213"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FILTER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ai-N0-qEQ" userLabel="filterTitle">
+                    <rect key="frame" x="74" y="9" width="113" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UHb-Kk-6G7" userLabel="filterImage">
+                    <rect key="frame" x="16" y="9" width="50" height="47"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="nsF-dF-k5X"/>
+                        <constraint firstAttribute="height" constant="47" id="oNm-0s-JqM"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1IF-Yk-WES" userLabel="messageDate">
+                    <rect key="frame" x="74" y="35" width="138" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Message Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq6-Qt-GPa" userLabel="messageContent">
+                    <rect key="frame" x="16" y="95" width="196" height="109"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zB4-89-8fc" userLabel="bookmarkButton">
+                    <rect key="frame" x="182" y="64" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="CtA-cI-kWr"/>
+                    </constraints>
+                    <state key="normal" image="bookmark_icon"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZ4-Km-nKm" userLabel="directionsButton">
+                    <rect key="frame" x="91" y="64" width="83" height="30"/>
+                    <state key="normal" title="Directions"/>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="zB4-89-8fc" firstAttribute="leading" secondItem="xZ4-Km-nKm" secondAttribute="trailing" constant="8" symbolic="YES" id="0xO-0k-4fF"/>
+                <constraint firstItem="UHb-Kk-6G7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="9" id="2bK-GK-eWn"/>
+                <constraint firstItem="UHb-Kk-6G7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="4lu-xA-gBn"/>
+                <constraint firstItem="UHb-Kk-6G7" firstAttribute="leading" secondItem="Aq6-Qt-GPa" secondAttribute="leading" id="OX3-2n-wcX"/>
+                <constraint firstItem="7ai-N0-qEQ" firstAttribute="leading" secondItem="UHb-Kk-6G7" secondAttribute="trailing" constant="8" symbolic="YES" id="S9F-Hw-aie"/>
+                <constraint firstItem="Aq6-Qt-GPa" firstAttribute="top" secondItem="UHb-Kk-6G7" secondAttribute="bottom" constant="39" id="YOo-U4-F1V"/>
+                <constraint firstItem="Aq6-Qt-GPa" firstAttribute="top" secondItem="zB4-89-8fc" secondAttribute="bottom" constant="1" id="ZVO-e4-oG2"/>
+                <constraint firstItem="zB4-89-8fc" firstAttribute="top" secondItem="xZ4-Km-nKm" secondAttribute="top" id="gmL-QK-seF"/>
+                <constraint firstItem="zB4-89-8fc" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="gtK-SF-0xl"/>
+                <constraint firstItem="zB4-89-8fc" firstAttribute="trailing" secondItem="Aq6-Qt-GPa" secondAttribute="trailing" id="mKp-Kc-Wog"/>
+                <constraint firstItem="zB4-89-8fc" firstAttribute="top" secondItem="1IF-Yk-WES" secondAttribute="bottom" constant="8" symbolic="YES" id="oQ7-Pi-BaF"/>
+                <constraint firstItem="zB4-89-8fc" firstAttribute="trailing" secondItem="1IF-Yk-WES" secondAttribute="trailing" id="rYm-BV-Cmj"/>
+                <constraint firstItem="1IF-Yk-WES" firstAttribute="leading" secondItem="UHb-Kk-6G7" secondAttribute="trailing" constant="8" symbolic="YES" id="tzx-jJ-qBE"/>
+                <constraint firstItem="UHb-Kk-6G7" firstAttribute="top" secondItem="7ai-N0-qEQ" secondAttribute="top" id="ymL-Ba-0ol"/>
+                <constraint firstItem="UHb-Kk-6G7" firstAttribute="bottom" secondItem="1IF-Yk-WES" secondAttribute="bottom" id="ytX-Zw-6W6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="bookmarkButton" destination="zB4-89-8fc" id="jx0-1F-vuX"/>
+                <outlet property="directionsButton" destination="xZ4-Km-nKm" id="ead-bp-BVU"/>
+                <outlet property="filterImage" destination="UHb-Kk-6G7" id="1GO-53-qc5"/>
+                <outlet property="filterTitle" destination="7ai-N0-qEQ" id="peC-8E-ndA"/>
+                <outlet property="messageContent" destination="Aq6-Qt-GPa" id="TaZ-SE-sV6"/>
+                <outlet property="messageDate" destination="1IF-Yk-WES" id="U7d-es-wfV"/>
+            </connections>
+            <point key="canvasLocation" x="67" y="85.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bookmark_icon" width="512" height="512"/>
+    </resources>
+</document>

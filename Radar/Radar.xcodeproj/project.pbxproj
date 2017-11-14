@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */; };
+		3F5EC3941FBB809D005BAC0E /* MessageDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */; };
+		3F5EC3961FBB87A0005BAC0E /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */; };
 		3F7BB7921FA6365D0014DF9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7911FA6365D0014DF9D /* AppDelegate.swift */; };
 		3F7BB7941FA6365D0014DF9D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7931FA6365D0014DF9D /* MapViewController.swift */; };
 		3F7BB7971FA6365D0014DF9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7BB7951FA6365D0014DF9D /* Main.storyboard */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotationView.swift; sourceTree = "<group>"; };
+		3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageDetail.xib; sourceTree = "<group>"; };
+		3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
 		3F7BB78E1FA6365D0014DF9D /* Radar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7BB7911FA6365D0014DF9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F7BB7931FA6365D0014DF9D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 				3FA4F52B1FB6423A004BD92B /* Message.swift */,
 				3FA4F52D1FB643AF004BD92B /* Filter.swift */,
 				3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */,
+				3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */,
+				3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */,
 				3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */,
 			);
 			path = Radar;
@@ -269,6 +275,7 @@
 			files = (
 				3F7BB79F1FA6365D0014DF9D /* LaunchScreen.storyboard in Resources */,
 				3F7BB79C1FA6365D0014DF9D /* Assets.xcassets in Resources */,
+				3F5EC3941FBB809D005BAC0E /* MessageDetail.xib in Resources */,
 				3F7BB7971FA6365D0014DF9D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +308,7 @@
 				3FA4F52C1FB6423A004BD92B /* Message.swift in Sources */,
 				3F7BB79A1FA6365D0014DF9D /* Radar.xcdatamodeld in Sources */,
 				3FA4F5321FB65274004BD92B /* MessageAnnotation.swift in Sources */,
+				3F5EC3961FBB87A0005BAC0E /* MessageDetail.swift in Sources */,
 				3F7BB7921FA6365D0014DF9D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

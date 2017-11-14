@@ -79,6 +79,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MessageAnnotationView
         if annotationView == nil {
             annotationView = MessageAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            annotationView?.canShowCallout = true
             let messageanno = annotationView?.annotation as! MessageAnnotation
             if(messageanno.message.filter.rawValue == "CUTE") {
                 annotationView?.markerTintColor = UIColor(displayP3Red: 1.0, green: 0.0, blue: 0.5, alpha: 1.0)
@@ -90,15 +91,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         else {
             annotationView!.annotation = annotation
         }
+        
+        configureDetailView(annotationView: annotationView!)
+        
         return annotationView
-//        else {
-//            let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "annotationView") ?? MessageAnnotationView()
-//            //annotationView.image = UIImage(named: "mapPin")
-//            //let annotation = annotationView as! MKMarkerAnnotationView
-//            let annotation = annotationView as! MessageAnnotationView
-//            //annotation.markerTintColor = UIColor(displayP3Red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
-//            return annotation
-//        }
+    }
+    
+    func configureDetailView(annotationView: MessageAnnotationView) {
+
     }
 
 }
@@ -139,4 +139,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //       print(String(describing: locationManager.location?.coordinate))
 //    }
 
+//        else {
+//            let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "annotationView") ?? MessageAnnotationView()
+//            //annotationView.image = UIImage(named: "mapPin")
+//            //let annotation = annotationView as! MKMarkerAnnotationView
+//            let annotation = annotationView as! MessageAnnotationView
+//            //annotation.markerTintColor = UIColor(displayP3Red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
+//            return annotation
+//        }
 
