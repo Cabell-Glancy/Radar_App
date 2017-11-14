@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */; };
+		3F5EC3941FBB809D005BAC0E /* MessageDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */; };
+		3F5EC3961FBB87A0005BAC0E /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */; };
 		3F7BB7921FA6365D0014DF9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7911FA6365D0014DF9D /* AppDelegate.swift */; };
-		3F7BB7941FA6365D0014DF9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7931FA6365D0014DF9D /* ViewController.swift */; };
+		3F7BB7941FA6365D0014DF9D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7931FA6365D0014DF9D /* MapViewController.swift */; };
 		3F7BB7971FA6365D0014DF9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7BB7951FA6365D0014DF9D /* Main.storyboard */; };
 		3F7BB79A1FA6365D0014DF9D /* Radar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7981FA6365D0014DF9D /* Radar.xcdatamodeld */; };
 		3F7BB79C1FA6365D0014DF9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F7BB79B1FA6365D0014DF9D /* Assets.xcassets */; };
 		3F7BB79F1FA6365D0014DF9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7BB79D1FA6365D0014DF9D /* LaunchScreen.storyboard */; };
 		3F7BB7AA1FA6365E0014DF9D /* RadarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7A91FA6365E0014DF9D /* RadarTests.swift */; };
 		3F7BB7B51FA6365E0014DF9D /* RadarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7BB7B41FA6365E0014DF9D /* RadarUITests.swift */; };
+		3F7BB7C41FA63A010014DF9D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7BB7C31FA63A010014DF9D /* MapKit.framework */; };
+		3FA4F52C1FB6423A004BD92B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F52B1FB6423A004BD92B /* Message.swift */; };
+		3FA4F52E1FB643AF004BD92B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F52D1FB643AF004BD92B /* Filter.swift */; };
+		3FA4F5321FB65274004BD92B /* MessageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */; };
+		3FA4F53B1FB6638E004BD92B /* UIView+BezierPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F53A1FB6638E004BD92B /* UIView+BezierPaths.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +43,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotationView.swift; sourceTree = "<group>"; };
+		3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageDetail.xib; sourceTree = "<group>"; };
+		3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
 		3F7BB78E1FA6365D0014DF9D /* Radar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7BB7911FA6365D0014DF9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3F7BB7931FA6365D0014DF9D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F7BB7931FA6365D0014DF9D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3F7BB7961FA6365D0014DF9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F7BB7991FA6365D0014DF9D /* Radar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Radar.xcdatamodel; sourceTree = "<group>"; };
 		3F7BB79B1FA6365D0014DF9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +60,11 @@
 		3F7BB7B01FA6365E0014DF9D /* RadarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7BB7B41FA6365E0014DF9D /* RadarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarUITests.swift; sourceTree = "<group>"; };
 		3F7BB7B61FA6365E0014DF9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F7BB7C31FA63A010014DF9D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3FA4F52B1FB6423A004BD92B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3FA4F52D1FB643AF004BD92B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotation.swift; sourceTree = "<group>"; };
+		3FA4F53A1FB6638E004BD92B /* UIView+BezierPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+BezierPaths.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F7BB7C41FA63A010014DF9D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +100,7 @@
 				3F7BB7A81FA6365E0014DF9D /* RadarTests */,
 				3F7BB7B31FA6365E0014DF9D /* RadarUITests */,
 				3F7BB78F1FA6365D0014DF9D /* Products */,
+				3F7BB7C21FA63A010014DF9D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,12 +118,19 @@
 			isa = PBXGroup;
 			children = (
 				3F7BB7911FA6365D0014DF9D /* AppDelegate.swift */,
-				3F7BB7931FA6365D0014DF9D /* ViewController.swift */,
+				3F7BB7931FA6365D0014DF9D /* MapViewController.swift */,
 				3F7BB7951FA6365D0014DF9D /* Main.storyboard */,
+				3FA4F53A1FB6638E004BD92B /* UIView+BezierPaths.swift */,
 				3F7BB79B1FA6365D0014DF9D /* Assets.xcassets */,
 				3F7BB79D1FA6365D0014DF9D /* LaunchScreen.storyboard */,
 				3F7BB7A01FA6365D0014DF9D /* Info.plist */,
 				3F7BB7981FA6365D0014DF9D /* Radar.xcdatamodeld */,
+				3FA4F52B1FB6423A004BD92B /* Message.swift */,
+				3FA4F52D1FB643AF004BD92B /* Filter.swift */,
+				3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */,
+				3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */,
+				3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */,
+				3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */,
 			);
 			path = Radar;
 			sourceTree = "<group>";
@@ -126,6 +151,14 @@
 				3F7BB7B61FA6365E0014DF9D /* Info.plist */,
 			);
 			path = RadarUITests;
+			sourceTree = "<group>";
+		};
+		3F7BB7C21FA63A010014DF9D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F7BB7C31FA63A010014DF9D /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +230,11 @@
 					3F7BB78D1FA6365D0014DF9D = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					3F7BB7A41FA6365E0014DF9D = {
 						CreatedOnToolsVersion = 9.0;
@@ -237,6 +275,7 @@
 			files = (
 				3F7BB79F1FA6365D0014DF9D /* LaunchScreen.storyboard in Resources */,
 				3F7BB79C1FA6365D0014DF9D /* Assets.xcassets in Resources */,
+				3F5EC3941FBB809D005BAC0E /* MessageDetail.xib in Resources */,
 				3F7BB7971FA6365D0014DF9D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,8 +301,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F7BB7941FA6365D0014DF9D /* ViewController.swift in Sources */,
+				3F7BB7941FA6365D0014DF9D /* MapViewController.swift in Sources */,
+				3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */,
+				3FA4F52E1FB643AF004BD92B /* Filter.swift in Sources */,
+				3FA4F53B1FB6638E004BD92B /* UIView+BezierPaths.swift in Sources */,
+				3FA4F52C1FB6423A004BD92B /* Message.swift in Sources */,
 				3F7BB79A1FA6365D0014DF9D /* Radar.xcdatamodeld in Sources */,
+				3FA4F5321FB65274004BD92B /* MessageAnnotation.swift in Sources */,
+				3F5EC3961FBB87A0005BAC0E /* MessageDetail.swift in Sources */,
 				3F7BB7921FA6365D0014DF9D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +475,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 89HN9782D7;
 				INFOPLIST_FILE = Radar/Info.plist;
@@ -445,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 89HN9782D7;
 				INFOPLIST_FILE = Radar/Info.plist;
