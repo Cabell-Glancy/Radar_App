@@ -23,18 +23,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         mapView.showsUserLocation = true
         mapView.delegate = self
+        
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-        
-        // Or, if needed, we can position map in the center of the view
         mapView.center = view.center
-        let message = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: mapView.userLocation.coordinate.latitude, longitude: mapView.userLocation.coordinate.longitude))
+
+        //let message = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.a, longitude: locationManager.location?.coordinate.longitude))
         
-        let messageAnnotation = MessageAnnotation(message: message)
+        //let messageAnnotation = MessageAnnotation(message: message)
         
-        print("USERLOCATION:" + String(describing: mapView.userLocation.coordinate))
-        
-        print("++++++++++++++++++++++" + String(describing: messageAnnotation.coordinate))
+ 
+        //print("++++++++++++++++++++++" + String(describing: messageAnnotation.coordinate))
         //mapView.addAnnotation(messageAnnotation)
         //mapView.showAnnotations([messageAnnotation], animated: true)
         
@@ -49,7 +48,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidAppear(true)
         determineCurrentLocation()
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
-        myAnnotation.coordinate = CLLocationCoordinate2D(latitude: mapView.userLocation.coordinate.latitude, longitude: mapView.userLocation.coordinate.longitude)
+        myAnnotation.coordinate = CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
         myAnnotation.title = "Current location"
         mapView.addAnnotation(myAnnotation)
         
@@ -73,6 +72,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             //locationManager.startUpdatingHeading()
             locationManager.startUpdatingLocation()
         }
+       print(String(describing: locationManager.location?.coordinate))
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -86,6 +86,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
         mapView.setRegion(region, animated: true)
+        manager.stopUpdatingLocation()
         
     }
 //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
