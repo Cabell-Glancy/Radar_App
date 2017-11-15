@@ -27,42 +27,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if CLLocationManager.locationServicesEnabled() {
             locationManager!.startUpdatingLocation()
             //locationManager.startUpdatingHeading()
+
         }
         
     }
     
-    func startGPS() {
+    func startGPS(handleComplete:(() -> ())) {
         if CLLocationManager.locationServicesEnabled(){
             
             switch CLLocationManager.authorizationStatus(){
             case .authorizedAlways:
-                /* Yes, always */
                 createLocationManager(startImmediately: true)
             case .authorizedWhenInUse:
-                /* Yes, only when our app is in use  */
                 createLocationManager(startImmediately: true)
             case .denied:
-                /* No */
                 displayAlertWithTitle(title: "Not Determined",
                                       message: "Location services are not allowed for this app")
             case .notDetermined:
-                /* We don't know yet, we have to ask */
                 createLocationManager(startImmediately: false)
                 if let manager = self.locationManager{
                     manager.requestWhenInUseAuthorization()
                 }
             case .restricted:
-                /* Restrictions have been applied, we have no access
-                 to location services */
                 displayAlertWithTitle(title: "Restricted",
                                       message: "Location services are not allowed for this app")
             }
             
             
         } else {
-            /* Location services are not enabled.
-             Take appropriate action: for instance, prompt the
-             user to enable the location services */
             let alertController = UIAlertController(title: NSLocalizedString("Location Services are currently disabled.", comment: ""), message: NSLocalizedString("Activate them under Privacy Settings to use the GPS service.", comment: ""), preferredStyle: .alert)
             
             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
@@ -75,11 +67,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.present(alertController, animated: true, completion: nil)
             print("Location services are not enabled")
         }
+        handleComplete()
         
     }
     
     func displayAlertWithTitle(title: String, message: String){
-        // Helper function for displaying dialog windows - no edits needed.
         let controller = UIAlertController(title: title,
                                            message: message,
                                            preferredStyle: .alert)
@@ -92,9 +84,45 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
+        print("Location manager failed with error = \(error)")
+    }
+    
+    private func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print("The authorization status of location services is changed to: ", terminator: "")
+        
+        switch CLLocationManager.authorizationStatus(){
+        case .authorizedAlways:
+            print("Authorized")
+        case .authorizedWhenInUse:
+            print("Authorized when in use")
+        case .denied:
+            print("Denied")
+        case .notDetermined:
+            print("Not determined")
+        case .restricted:
+            print("Restricted")
+        }
+        
+    }
+    
+    func handleMap() {
+        let center = CLLocationCoordinate2D(latitude: (locationManager?.location?.coordinate.latitude)!, longitude: (locationManager?.location?.coordinate.longitude)!)
+        let viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        
+        mapView.setRegion(viewRegion, animated: false)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let locationManager = CLLocationManager()
+    
+        self.startGPS { () -> () in
+            self.handleMap()
+        }
+        
+
+        
         mapView.delegate = self
         mapView.showsUserLocation = true
         
@@ -102,16 +130,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsUserLocation = true
         
         //Zoom to user location
-            let center = CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
-                viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-                
 
-        mapView.setRegion(viewRegion, animated: false)
-        
-//        DispatchQueue.main.async {
-//            locationManager.startUpdatingLocation()
-//        }
-        
         mapView.center = view.center
     }
 
