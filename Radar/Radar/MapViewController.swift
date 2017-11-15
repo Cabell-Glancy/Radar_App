@@ -13,47 +13,105 @@ private let kMessageAnnotationName = "kMessageAnnotationName"
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
 
-    var locationManager = CLLocationManager()
     @IBOutlet weak var mapView: MKMapView!
-    
+    var locationManager: CLLocationManager?
     var selectedMessage: Message?
+    
+    func createLocationManager(startImmediately: Bool){
+        // Add code to start the locationManager
+        locationManager = CLLocationManager()
+        locationManager!.delegate = self
+        locationManager!.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager!.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager!.startUpdatingLocation()
+            //locationManager.startUpdatingHeading()
+        }
+        
+    }
+    
+    func startGPS() {
+        if CLLocationManager.locationServicesEnabled(){
+            
+            switch CLLocationManager.authorizationStatus(){
+            case .authorizedAlways:
+                /* Yes, always */
+                createLocationManager(startImmediately: true)
+            case .authorizedWhenInUse:
+                /* Yes, only when our app is in use  */
+                createLocationManager(startImmediately: true)
+            case .denied:
+                /* No */
+                displayAlertWithTitle(title: "Not Determined",
+                                      message: "Location services are not allowed for this app")
+            case .notDetermined:
+                /* We don't know yet, we have to ask */
+                createLocationManager(startImmediately: false)
+                if let manager = self.locationManager{
+                    manager.requestWhenInUseAuthorization()
+                }
+            case .restricted:
+                /* Restrictions have been applied, we have no access
+                 to location services */
+                displayAlertWithTitle(title: "Restricted",
+                                      message: "Location services are not allowed for this app")
+            }
+            
+            
+        } else {
+            /* Location services are not enabled.
+             Take appropriate action: for instance, prompt the
+             user to enable the location services */
+            let alertController = UIAlertController(title: NSLocalizedString("Location Services are currently disabled.", comment: ""), message: NSLocalizedString("Activate them under Privacy Settings to use the GPS service.", comment: ""), preferredStyle: .alert)
+            
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+            let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default) { (UIAlertAction) in
+                UIApplication.shared.openURL(NSURL(string: "App-Prefs:root=LOCATION_SERVICES")! as URL)
+            }
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(settingsAction)
+            self.present(alertController, animated: true, completion: nil)
+            print("Location services are not enabled")
+        }
+        
+    }
+    
+    func displayAlertWithTitle(title: String, message: String){
+        // Helper function for displaying dialog windows - no edits needed.
+        let controller = UIAlertController(title: title,
+                                           message: message,
+                                           preferredStyle: .alert)
+        
+        controller.addAction(UIAlertAction(title: "OK",
+                                           style: .default,
+                                           handler: nil))
+        
+        present(controller, animated: true, completion: nil)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let locationManager = CLLocationManager()
         mapView.delegate = self
         mapView.showsUserLocation = true
         
         mapView.delegate = self
         mapView.showsUserLocation = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.delegate = self
         
-        var viewRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-        
-        //Check for Location Services
-        if (CLLocationManager.locationServicesEnabled()) {
-            locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
-            locationManager.requestWhenInUseAuthorization()
-        }
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
         //Zoom to user location
-            if let latitude = locationManager.location?.coordinate.latitude {
-                let center = CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+            let center = CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
                 viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
                 
-            }
-        }
+
         mapView.setRegion(viewRegion, animated: false)
         
-        DispatchQueue.main.async {
-            self.locationManager.startUpdatingLocation()
-        }
+//        DispatchQueue.main.async {
+//            locationManager.startUpdatingLocation()
+//        }
+        
         mapView.center = view.center
     }
 
@@ -65,14 +123,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        let message = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! + 0.01))
-        let message2 = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.funny, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! - 0.01))
-        
-        let messageAnnotation = MessageAnnotation(message: message)
-        let messageAnnotation2 = MessageAnnotation(message: message2)
-        
-        mapView.addAnnotations([messageAnnotation, messageAnnotation2])
-        
+//        let message = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! + 0.01))
+//        let message2 = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.funny, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! - 0.01))
+//
+//        let messageAnnotation = MessageAnnotation(message: message)
+//        let messageAnnotation2 = MessageAnnotation(message: message2)
+//
+//        mapView.addAnnotations([messageAnnotation, messageAnnotation2])
+
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
