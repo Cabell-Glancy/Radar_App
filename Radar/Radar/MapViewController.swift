@@ -29,6 +29,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         
+        var viewRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        
         //Check for Location Services
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
@@ -40,10 +42,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
-        }
         //Zoom to user location
-        let center = CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
-        let viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+            if let latitude = locationManager.location?.coordinate.latitude {
+                let center = CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+                viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+                
+            }
+        }
         mapView.setRegion(viewRegion, animated: false)
         
         DispatchQueue.main.async {
@@ -79,7 +84,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MessageAnnotationView
         if annotationView == nil {
             annotationView = MessageAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            annotationView?.canShowCallout = true
             let messageanno = annotationView?.annotation as! MessageAnnotation
             if(messageanno.message.filter.rawValue == "CUTE") {
                 annotationView?.markerTintColor = UIColor(displayP3Red: 1.0, green: 0.0, blue: 0.5, alpha: 1.0)
@@ -87,18 +91,56 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             else {
                 annotationView?.markerTintColor = UIColor(displayP3Red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
             }
+            annotationView?.canShowCallout = true
         }
         else {
             annotationView!.annotation = annotation
         }
         
-        configureDetailView(annotationView: annotationView!)
+        //configureDetailView(annotationView: annotationView!)
         
         return annotationView
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let calloutView = MessageDetail()
+        calloutView.translatesAutoresizingMaskIntoConstraints = false
+        calloutView.backgroundColor = UIColor.lightGray
+        view.addSubview(calloutView)
+        
+        NSLayoutConstraint.activate([
+            calloutView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            calloutView.widthAnchor.constraint(equalToConstant: 60),
+            calloutView.heightAnchor.constraint(equalToConstant: 30),
+            calloutView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.calloutOffset.x)
+            ])
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        if view.isKind(of: MKAnnotationView.self)
+        {
+            for subview in view.subviews
+            {
+                if subview.isKind(of: MessageDetail.self) {
+                    subview.removeFromSuperview()
+                }
+            }
+        }
+    }
+    
     func configureDetailView(annotationView: MessageAnnotationView) {
-
+        let calloutView = MessageDetail()
+        calloutView.translatesAutoresizingMaskIntoConstraints = false
+        calloutView.backgroundColor = UIColor.lightGray
+        annotationView.addSubview(calloutView)
+        
+        NSLayoutConstraint.activate([
+            calloutView.bottomAnchor.constraint(equalTo: annotationView.topAnchor, constant: 0),
+            calloutView.widthAnchor.constraint(equalToConstant: 60),
+            calloutView.heightAnchor.constraint(equalToConstant: 30),
+            calloutView.centerXAnchor.constraint(equalTo: annotationView.centerXAnchor, constant: annotationView.calloutOffset.x)
+        ])
     }
 
 }
