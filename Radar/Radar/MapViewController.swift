@@ -8,62 +8,42 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 private let kMessageAnnotationName = "kMessageAnnotationName"
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
-    var locationManager = CLLocationManager()
     @IBOutlet weak var mapView: MKMapView!
+    //let locationManager = CLLocationManager()
+    
+    lazy var locationManager: CLLocationManager = {
+        [unowned self] in
+        var _locationManager = CLLocationManager()
+        _locationManager.delegate = self
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //_locationManager.allowsBackgroundLocationUpdates = true
+        _locationManager.pausesLocationUpdatesAutomatically = false  // So doesn't shut off if user stops to rest
+        _locationManager.activityType = .fitness
+        return _locationManager
+        }()
+    
+    var userlocation = CLLocation(latitude: 38.03, longitude: -78.503611)
+    //let delegate = UIApplication.shared.delegate as! AppDelegate
+    
+    let locationDelegate: LocationDelegate = LocationDelegate()
     
     var selectedMessage: Message?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        mapView.delegate = self
-        mapView.showsUserLocation = true
-        
-        mapView.delegate = self
-        mapView.showsUserLocation = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.delegate = self
-        
-        var viewRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-        
-        //Check for Location Services
-        if (CLLocationManager.locationServicesEnabled()) {
-            locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
-            locationManager.requestWhenInUseAuthorization()
-        }
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
-        //Zoom to user location
-            if let latitude = locationManager.location?.coordinate.latitude {
-                let center = CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
-                viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-                
-            }
-        }
-        mapView.setRegion(viewRegion, animated: false)
-        
-        DispatchQueue.main.async {
-            self.locationManager.startUpdatingLocation()
-        }
-        mapView.center = view.center
-    }
+    func handleMap() {
+        print("HANDLEMAP+++++++++++++++++++++")
+        let long = locationManager.location?.coordinate.longitude
+        let lat = locationManager.location?.coordinate.latitude
+        //let center = CLLocationCoordinate2D(latitude: userlocation.coordinate.latitude, longitude: userlocation.coordinate.longitude)
+        let center = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+        let viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        mapView.setRegion(viewRegion, animated: false)
         
         let message = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! + 0.01))
         let message2 = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.funny, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! - 0.01))
@@ -72,7 +52,59 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let messageAnnotation2 = MessageAnnotation(message: message2)
         
         mapView.addAnnotations([messageAnnotation, messageAnnotation2])
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        if CLLocationManager.authorizationStatus() != .authorizedAlways     // Check authorization for location tracking
+        {
+            print("I am running")
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization() // LocationManager will callbackdidChange... once user responds
+            print("WOT")
+        } else {
+            print("I am also running")
+            locationManager.startUpdatingLocation()
+        }
+        
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        
+        print(String(describing: locationManager.location?.coordinate))
+
+        mapView.center = view.center
+    }
+    
+    func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status
+        {
+        case .authorizedAlways:
+            locationManager.startUpdatingLocation()
+            print("Made it to authorized Always")
+            self.handleMap()
+            print("always authorize")
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+            print("Made it to authorized when in use")
+            self.handleMap()
+            print("authorized when in use")
+        default:
+            // User denied access, handle as appropriate
+            print("u suck")
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+
+
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -144,49 +176,3 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
 }
-
-//let message = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.a, longitude: locationManager.location?.coordinate.longitude))
-
-//let messageAnnotation = MessageAnnotation(message: message)
-
-//mapView.addAnnotation(messageAnnotation)
-
-
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        let userLocation:CLLocation = locations[0] as CLLocation
-//
-//        // Call stopUpdatingLocation() to stop listening for location updates,
-//        // other wise this function will be called every time when user location changes.
-//        //manager.stopUpdatingLocation()
-//
-//        let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-//        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-//
-//        mapView.setRegion(region, animated: true)
-//        manager.stopUpdatingLocation()
-//
-//    }
-
-//    func determineCurrentLocation()
-//    {
-//        locationManager = CLLocationManager()
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.requestAlwaysAuthorization()
-//
-//        if CLLocationManager.locationServicesEnabled() {
-//            //locationManager.startUpdatingHeading()
-//            locationManager.startUpdatingLocation()
-//        }
-//       print(String(describing: locationManager.location?.coordinate))
-//    }
-
-//        else {
-//            let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "annotationView") ?? MessageAnnotationView()
-//            //annotationView.image = UIImage(named: "mapPin")
-//            //let annotation = annotationView as! MKMarkerAnnotationView
-//            let annotation = annotationView as! MessageAnnotationView
-//            //annotation.markerTintColor = UIColor(displayP3Red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
-//            return annotation
-//        }
-
