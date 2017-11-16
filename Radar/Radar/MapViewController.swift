@@ -59,9 +59,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         if CLLocationManager.authorizationStatus() != .authorizedAlways     // Check authorization for location tracking
         {
+            print("I am running")
             locationManager.requestWhenInUseAuthorization()
-            //locationManager.requestAlwaysAuthorization()                    // LocationManager will callbackdidChange... once user responds
+            locationManager.requestAlwaysAuthorization() // LocationManager will callbackdidChange... once user responds
+            print("WOT")
         } else {
+            print("I am also running")
             locationManager.startUpdatingLocation()
         }
         
@@ -78,10 +81,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
         case .authorizedAlways:
             locationManager.startUpdatingLocation()
+            print("Made it to authorized Always")
             self.handleMap()
             print("always authorize")
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
+            print("Made it to authorized when in use")
             self.handleMap()
             print("authorized when in use")
         default:
