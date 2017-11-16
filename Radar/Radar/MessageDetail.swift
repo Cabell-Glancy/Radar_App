@@ -16,8 +16,14 @@ class MessageDetail: UIView {
     @IBOutlet weak var bookmarkButton: UIButton!
     @IBOutlet weak var directionsButton: UIButton!
     @IBOutlet weak var messageContent: UILabel!
+    @IBOutlet weak var backgroundArea: UIButton!
     
     //var message: Message
+    
+    public func populateWithMessage(message: Message) {
+        filterTitle.text = message.filter.rawValue
+        messageContent.text = message.content
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

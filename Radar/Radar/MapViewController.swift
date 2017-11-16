@@ -45,8 +45,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         mapView.setRegion(viewRegion, animated: false)
         
-        let message = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! + 0.01))
-        let message2 = Message(content: "Hello", duration: 50, distance: 50, filter: Filter.funny, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! - 0.01))
+        let message = Message(content: "A dachshund looking like a tiny hotdog, this is #2cute, come here ASAP peepz", duration: 50, distance: 50, filter: Filter.cute, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! + 0.01))
+        let message2 = Message(content: "Someone just fell over and he is still trying to get up. Too funny OMG", duration: 50, distance: 50, filter: Filter.funny, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! - 0.01))
         
         let messageAnnotation = MessageAnnotation(message: message)
         let messageAnnotation2 = MessageAnnotation(message: message2)
@@ -135,18 +135,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let calloutView = MessageDetail()
-        calloutView.translatesAutoresizingMaskIntoConstraints = false
-        calloutView.backgroundColor = UIColor.lightGray
+        let calloutView = (Bundle.main.loadNibNamed("MessageDetail", owner: self, options: nil))?[0] as! MessageDetail
+        let calloutViewFrame = calloutView.frame
+        calloutView.frame = CGRect(x: -calloutViewFrame.size.width/2.23, y: -calloutViewFrame.size.height+10, width: 228, height: 213)
+        //calloutView.populateWithMessage(message: Message)
+        if let messageannotation = view.annotation as? MessageAnnotation {
+            calloutView.populateWithMessage(message: messageannotation.message)
+        }
         view.addSubview(calloutView)
-        
-        NSLayoutConstraint.activate([
-            calloutView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            calloutView.widthAnchor.constraint(equalToConstant: 60),
-            calloutView.heightAnchor.constraint(equalToConstant: 30),
-            calloutView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.calloutOffset.x)
-            ])
-        
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
