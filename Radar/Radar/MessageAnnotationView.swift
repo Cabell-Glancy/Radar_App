@@ -49,5 +49,6 @@ class MessageAnnotationView: MKMarkerAnnotationView {
         return isInside;
     }
     
+
 }
 
