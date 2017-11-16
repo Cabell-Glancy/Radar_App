@@ -1,5 +1,7 @@
 # final-project-final-opal
-final-project-final-opal created by GitHub Classroom
+
+Cabell Glancy (bcg7mf) <br>
+Matias Rietig (mjr9r)
 
 ---
 
