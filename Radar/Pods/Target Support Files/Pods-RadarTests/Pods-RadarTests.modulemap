@@ -1,0 +1,6 @@
+framework module Pods_RadarTests {
+  umbrella header "Pods-RadarTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
