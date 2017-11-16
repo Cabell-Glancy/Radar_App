@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CoreLocation
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         //locationManager = CLLocationManager()
         //locationManager?.requestWhenInUseAuthorization()
+        FirebaseApp.configure()
         return true
     }
 
