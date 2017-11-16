@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F1D1EC81FBD03DC003F07BA /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1D1EC71FBD03DC003F07BA /* LocationDelegate.swift */; };
 		3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */; };
 		3F5EC3941FBB809D005BAC0E /* MessageDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */; };
 		3F5EC3961FBB87A0005BAC0E /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */; };
@@ -22,7 +23,6 @@
 		3FA4F52C1FB6423A004BD92B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F52B1FB6423A004BD92B /* Message.swift */; };
 		3FA4F52E1FB643AF004BD92B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F52D1FB643AF004BD92B /* Filter.swift */; };
 		3FA4F5321FB65274004BD92B /* MessageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */; };
-		3FA4F53B1FB6638E004BD92B /* UIView+BezierPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F53A1FB6638E004BD92B /* UIView+BezierPaths.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F1D1EC71FBD03DC003F07BA /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotationView.swift; sourceTree = "<group>"; };
 		3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageDetail.xib; sourceTree = "<group>"; };
 		3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		3FA4F52B1FB6423A004BD92B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3FA4F52D1FB643AF004BD92B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		3FA4F5311FB65274004BD92B /* MessageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotation.swift; sourceTree = "<group>"; };
-		3FA4F53A1FB6638E004BD92B /* UIView+BezierPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+BezierPaths.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +120,6 @@
 				3F7BB7911FA6365D0014DF9D /* AppDelegate.swift */,
 				3F7BB7931FA6365D0014DF9D /* MapViewController.swift */,
 				3F7BB7951FA6365D0014DF9D /* Main.storyboard */,
-				3FA4F53A1FB6638E004BD92B /* UIView+BezierPaths.swift */,
 				3F7BB79B1FA6365D0014DF9D /* Assets.xcassets */,
 				3F7BB79D1FA6365D0014DF9D /* LaunchScreen.storyboard */,
 				3F7BB7A01FA6365D0014DF9D /* Info.plist */,
@@ -131,6 +130,7 @@
 				3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */,
 				3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */,
 				3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */,
+				3F1D1EC71FBD03DC003F07BA /* LocationDelegate.swift */,
 			);
 			path = Radar;
 			sourceTree = "<group>";
@@ -304,8 +304,8 @@
 				3F7BB7941FA6365D0014DF9D /* MapViewController.swift in Sources */,
 				3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */,
 				3FA4F52E1FB643AF004BD92B /* Filter.swift in Sources */,
-				3FA4F53B1FB6638E004BD92B /* UIView+BezierPaths.swift in Sources */,
 				3FA4F52C1FB6423A004BD92B /* Message.swift in Sources */,
+				3F1D1EC81FBD03DC003F07BA /* LocationDelegate.swift in Sources */,
 				3F7BB79A1FA6365D0014DF9D /* Radar.xcdatamodeld in Sources */,
 				3FA4F5321FB65274004BD92B /* MessageAnnotation.swift in Sources */,
 				3F5EC3961FBB87A0005BAC0E /* MessageDetail.swift in Sources */,
