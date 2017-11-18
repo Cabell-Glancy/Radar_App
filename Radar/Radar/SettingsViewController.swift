@@ -28,7 +28,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var qdDurationLabel: UILabel!
     
     @IBAction func qdDurationStepper(_ sender: UIStepper) {
-        qdDurationLabel.text = String(describing: Int(sender.value))
+        qdDurationLabel.text = String(describing: sender.value)
     }
     
     @IBAction func personalRange(_ sender: UIStepper) {

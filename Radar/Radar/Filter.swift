@@ -19,4 +19,6 @@ enum Filter: String {
     static let allValues = [event.rawValue, deal.rawValue, funny.rawValue, cute.rawValue, educational.rawValue, scavenger_hunt.rawValue]
     
     static let imageValues = ["event-icon", "deal-icon", "lol-icon", "dog-icon", "education-icon", "scavenger-icon"]
+    
+    static let filterValues = [event, deal, funny, cute, educational, scavenger_hunt]
 }

@@ -37,6 +37,19 @@ class MessageDetail: UIView {
         if filter.rawValue == "LOL!" {
             filterImage.image = UIImage(named: "lol-icon")
         }
+        if filter.rawValue == "Aha!" {
+            filterImage.image = UIImage(named: "education-icon")
+        }
+        if filter.rawValue == "Deal" {
+            filterImage.image = UIImage(named: "deal-icon")
+        }
+        if filter.rawValue == "Secret" {
+            filterImage.image = UIImage(named: "scavenger-icon")
+        }
+        if filter.rawValue == "Event" {
+            filterImage.image = UIImage(named: "event-icon")
+        }
+        
     }
     
     override func awakeFromNib() {
