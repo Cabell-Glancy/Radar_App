@@ -14,5 +14,9 @@ enum Filter: String {
     case funny = "LOL!"
     case cute = "CUTE"
     case educational = "Aha!"
-    case scavenger_hunt = "??"
+    case scavenger_hunt = "Secret"
+    
+    static let allValues = [event.rawValue, deal.rawValue, funny.rawValue, cute.rawValue, educational.rawValue, scavenger_hunt.rawValue]
+    
+    static let imageValues = ["event-icon", "deal-icon", "lol-icon", "dog-icon", "education-icon", "scavenger-icon"]
 }
