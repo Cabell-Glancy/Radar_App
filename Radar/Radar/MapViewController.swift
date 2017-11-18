@@ -102,6 +102,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Dispose of any resources that can be recreated.
     }
     
+    func filterByDistance() { // this has to be called in handlemap and viewdidappear once firebase is implemented
+        let annotations = mapView.annotations // Has to be pulled from firebase
+        mapView.removeAnnotations(annotations)
+        
+        for annotation in annotations {
+            if(annotation is MKUserLocation) {
+                continue
+            }
+            let mapAnnotation = annotation as! MessageAnnotation
+            let distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate((locationManager.location?.coordinate)!), MKMapPointForCoordinate(annotation.coordinate))/1609.344 // get distance in miles
+            if(!(distance > UserDefaults.standard.double(forKey: "personalRange") || distance > mapAnnotation.message.distance)) {
+                mapView.addAnnotation(mapAnnotation)
+            }
+            print("Distance: " + String(distance))
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if(!UserDefaults.standard.bool(forKey: "isQdEnabled")) {
@@ -122,6 +139,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if annotationView == nil {
             annotationView = MessageAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             let messageanno = annotationView?.annotation as! MessageAnnotation
+            
             switch (messageanno.message.filter.rawValue) {
             case "CUTE":
                 annotationView?.markerTintColor = UIColor.purple
