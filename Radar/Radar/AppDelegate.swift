@@ -19,8 +19,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //locationManager = CLLocationManager()
-        //locationManager?.requestWhenInUseAuthorization()
+        
+        // Set initial UserDefaults
+        if(UserDefaults.standard.object(forKey: "isQdEnabled") == nil) {
+            UserDefaults.standard.set(true, forKey: "isQdEnabled")
+        }
+        if(UserDefaults.standard.object(forKey: "qdDistance") == nil) {
+            UserDefaults.standard.set(1.0, forKey: "qdDistance")
+        }
+        if(UserDefaults.standard.object(forKey: "qdDuration") == nil) {
+            UserDefaults.standard.set(1.0, forKey: "qdDuration")
+        }
+        if(UserDefaults.standard.object(forKey: "personalRange") == nil) {
+            UserDefaults.standard.set(2.0, forKey: "personalRange")
+        }
+        
         FirebaseApp.configure()
         return true
     }

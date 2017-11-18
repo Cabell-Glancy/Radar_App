@@ -23,6 +23,20 @@ class MessageDetail: UIView {
     public func populateWithMessage(message: Message) {
         filterTitle.text = message.filter.rawValue
         messageContent.text = message.content
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day, .hour, .minute]
+        formatter.unitsStyle = .abbreviated
+        messageDate.text = formatter.string(from: message.date, to: Date())! + " ago"
+        setImage(filter: message.filter)
+    }
+    
+    public func setImage(filter: Filter) {
+        if filter.rawValue == "CUTE" {
+            filterImage.image = UIImage(named: "dog-icon")
+        }
+        if filter.rawValue == "LOL!" {
+            filterImage.image = UIImage(named: "lol-icon")
+        }
     }
     
     override func awakeFromNib() {
