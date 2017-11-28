@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ComposeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
 
@@ -37,6 +38,10 @@ class ComposeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let mapViewController = barViewControllers![0].childViewControllers[0] as! MapViewController
         let row = filterPicker.selectedRow(inComponent: 0)
         let filter = Filter.filterValues[row]
+        
+        
+        fire_post(postcontent: messageTextField.text ,duration: messageDurationStepperCheck.value, distance:messageDistanceStepperCheck.value , date: Date().description, filter: filter.rawValue, latitude: (mapViewController.locationManager.location?.coordinate)!.latitude, longitude: (mapViewController.locationManager.location?.coordinate)!.longitude)
+        
         let message = Message(content: messageTextField.text, duration: messageDurationStepperCheck.value, distance: messageDistanceStepperCheck.value, date: Date(), filter: filter, location: (mapViewController.locationManager.location?.coordinate)!)
         let messageAnnotation = MessageAnnotation(message: message)
         mapViewController.mapView.addAnnotation(messageAnnotation)
@@ -49,6 +54,22 @@ class ComposeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers![0]
         
     }
+    
+    func fire_post(postcontent:String!, duration: Double!, distance: Double!, date: String!, filter: String!, latitude: Double!, longitude: Double!){
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        let parentRef = ref?.child("Messages").childByAutoId()
+        
+        parentRef?.child("Content").setValue(postcontent)
+        parentRef?.child("Duration").setValue(duration)
+        parentRef?.child("Distance").setValue(distance)
+        parentRef?.child("Date").setValue(date)
+        parentRef?.child("Filter").setValue(filter)
+        parentRef?.child("Latitiude").setValue(latitude)
+        parentRef?.child("Longitude").setValue(longitude)
+    }
+    
+    
     @IBOutlet weak var messageTextField: UITextView!
     
     override func viewDidLoad() {
