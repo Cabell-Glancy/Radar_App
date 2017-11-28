@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
 
 private let kMessageAnnotationName = "kMessageAnnotationName"
 
@@ -219,6 +220,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let messageAnnotation = MessageAnnotation(message: message)
         mapView.addAnnotation(messageAnnotation)
         quickdropField.text = ""
+        
+        // Store Message in CoreData
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let messageTest = NSEntityDescription.insertNewObject(forEntityName: "StoreMessage", into: context)
+        messageTest.setValue(message, forKey: "message")
+        messageTest.setValue(true, forKey: "sender")
+        
+        do {
+            try context.save()
+        }
+        catch {
+            print("Nup")
+        }
+        
+        
         return true
     }
     

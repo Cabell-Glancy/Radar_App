@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ComposeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
 
@@ -40,6 +41,20 @@ class ComposeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let message = Message(content: messageTextField.text, duration: messageDurationStepperCheck.value, distance: messageDistanceStepperCheck.value, date: Date(), filter: filter, location: (mapViewController.locationManager.location?.coordinate)!)
         let messageAnnotation = MessageAnnotation(message: message)
         mapViewController.mapView.addAnnotation(messageAnnotation)
+        
+        // Store Message in CoreData
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let messageTest = NSEntityDescription.insertNewObject(forEntityName: "StoreMessage", into: context)
+        messageTest.setValue(message, forKey: "message")
+        messageTest.setValue(true, forKey: "sender")
+
+        do {
+            try context.save()
+        }
+        catch {
+            print("Nup")
+        }
         
         // Reset Fields
         messageTextField.text = nil
