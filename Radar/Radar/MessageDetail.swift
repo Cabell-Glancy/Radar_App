@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MessageDetail: UIView {
 
@@ -17,10 +18,12 @@ class MessageDetail: UIView {
     @IBOutlet weak var directionsButton: UIButton!
     @IBOutlet weak var messageContent: UILabel!
     @IBOutlet weak var backgroundArea: UIButton!
+    weak var message: Message?
     
     //var message: Message
     
     public func populateWithMessage(message: Message) {
+        self.message = message
         filterTitle.text = message.filter.rawValue
         messageContent.text = message.content
         let formatter = DateComponentsFormatter()
@@ -52,6 +55,20 @@ class MessageDetail: UIView {
         
     }
     
+    @objc public func bookmarkMessage(_ sender: UIButton!) {
+        // Store Message in CoreData
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let messageTest = NSEntityDescription.insertNewObject(forEntityName: "StoreMessage", into: context)
+        messageTest.setValue(message, forKey: "message")
+        messageTest.setValue(false, forKey: "sender")
+        
+        do {
+            try context.save()
+        }
+        catch {
+            print("Nup")
+        }    }
     override func awakeFromNib() {
         super.awakeFromNib()
         
