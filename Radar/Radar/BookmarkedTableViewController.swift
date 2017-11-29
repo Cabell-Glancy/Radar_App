@@ -7,39 +7,97 @@
 //
 
 import UIKit
+import CoreData
+import MapKit
 
 class BookmarkedTableViewController: UITableViewController {
 
+    var messages : [NSManagedObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.topItem?.title = "Bookmarked"
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Load Messages
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "StoreMessage")
+        do {
+            messages = try managedContext.fetch(fetchRequest)
+            messages = messages.filter { ($0.value(forKey: "sender") as! Bool == false) }
+        }
+        catch {
+            print("NOPE")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Bookmarked"
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "StoreMessage")
+        do {
+            messages = try managedContext.fetch(fetchRequest)
+            messages = messages.filter { ($0.value(forKey: "sender") as! Bool == false) }
+        }
+        catch  {
+            print("NOPE")
+        }
+        self.tableView.reloadData()
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return messages.count
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageTableViewCell
+        let message = messages[indexPath.row].value(forKey: "message") as! Message
+        cell.contentLabel.text = message.content
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        cell.dateLabel.text = dateFormatter.string(from: message.date)
+        let findButton = cell.findButton
+        findButton?.tag = indexPath.row
+        findButton?.addTarget(self, action: #selector(findAction), for: .touchUpInside)
+        
+        //       let barViewControllers = self.tabBarController?.viewControllers
+        //       let mapViewController = barViewControllers![0].childViewControllers[0] as! MapViewController
+        
+        cell.showLocation(message: message)
+        return cell
+    }
+    
+    @objc func findAction(sender: UIButton!) {
+        let location = (messages[sender.tag].value(forKey: "message") as! Message).location
+        
+        let barViewControllers = self.tabBarController?.viewControllers
+        let mapViewController = barViewControllers![0].childViewControllers[0] as! MapViewController
+        let mapView = mapViewController.mapView
+        
+        let long = location.longitude
+        let lat = location.latitude
+        let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        let viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        
+        mapView?.setRegion(viewRegion, animated: false)
+        self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers![0]
     }
 
     /*

@@ -182,8 +182,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let messageannotation = view.annotation as? MessageAnnotation {
             calloutView.populateWithMessage(message: messageannotation.message)
         }
+        let bookmarkButton = calloutView.bookmarkButton
+        bookmarkButton?.addTarget(calloutView, action: #selector(calloutView.bookmarkMessage), for: .touchUpInside)
+        
         view.addSubview(calloutView)
     }
+    
+
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         if view.isKind(of: MKAnnotationView.self)

@@ -8,11 +8,12 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 class SentTableViewController: UITableViewController {
     
     var messages : [NSManagedObject] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.topItem?.title = "Sent"
@@ -24,6 +25,7 @@ class SentTableViewController: UITableViewController {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "StoreMessage")
         do {
             messages = try managedContext.fetch(fetchRequest)
+            messages = messages.filter { ($0.value(forKey: "sender") as! Bool == true) }
         }
         catch {
             print("NOPE")
@@ -38,6 +40,7 @@ class SentTableViewController: UITableViewController {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "StoreMessage")
         do {
             messages = try managedContext.fetch(fetchRequest)
+            messages = messages.filter { ($0.value(forKey: "sender") as! Bool == true) }
         }
         catch  {
             print("NOPE")
@@ -71,12 +74,30 @@ class SentTableViewController: UITableViewController {
         dateFormatter.timeStyle = .short
         cell.dateLabel.text = dateFormatter.string(from: message.date)
         let findButton = cell.findButton
-        //findButton?.addTarget(self, action: #selector(findAction(sender: findButton, message: message)), for: .touchUpInside)
+        findButton?.tag = indexPath.row
+        findButton?.addTarget(self, action: #selector(findAction), for: .touchUpInside)
+        
+ //       let barViewControllers = self.tabBarController?.viewControllers
+ //       let mapViewController = barViewControllers![0].childViewControllers[0] as! MapViewController
+ 
+        cell.showLocation(message: message)
         return cell
     }
     
-    @objc func findAction(sender: UIButton!, message: Message) {
+    @objc func findAction(sender: UIButton!) {
+        let location = (messages[sender.tag].value(forKey: "message") as! Message).location
         
+        let barViewControllers = self.tabBarController?.viewControllers
+        let mapViewController = barViewControllers![0].childViewControllers[0] as! MapViewController
+        let mapView = mapViewController.mapView
+        
+        let long = location.longitude
+        let lat = location.latitude
+        let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        let viewRegion = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        
+        mapView?.setRegion(viewRegion, animated: false)
+        self.tabBarController?.selectedViewController = self.tabBarController?.viewControllers![0]
     }
 
     /*
