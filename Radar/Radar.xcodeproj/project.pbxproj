@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3EC7B524D7B0C22D85C9F177 /* Pods_Radar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F19C1615A10B7914B0C654F /* Pods_Radar.framework */; };
+		3F025EDE1FC4E77100825C2A /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F025EDD1FC4E77100825C2A /* SavedViewController.swift */; };
+		3F5E7A241FCDE21F005E1D63 /* SentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5E7A231FCDE21F005E1D63 /* SentTableViewController.swift */; };
+		3F5E7A261FCDE235005E1D63 /* BookmarkedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5E7A251FCDE235005E1D63 /* BookmarkedTableViewController.swift */; };
+		3F5E7A281FCDEF4D005E1D63 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5E7A271FCDEF4D005E1D63 /* MessageTableViewCell.swift */; };
 		3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */; };
 		3F5EC3941FBB809D005BAC0E /* MessageDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */; };
 		3F5EC3961FBB87A0005BAC0E /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */; };
@@ -50,6 +54,10 @@
 /* Begin PBXFileReference section */
 		16C747490889CF8724DA30A1 /* Pods-Radar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Radar/Pods-Radar.release.xcconfig"; sourceTree = "<group>"; };
 		36AF29D930FD0C838B18CD65 /* Pods_RadarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F025EDD1FC4E77100825C2A /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
+		3F5E7A231FCDE21F005E1D63 /* SentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentTableViewController.swift; sourceTree = "<group>"; };
+		3F5E7A251FCDE235005E1D63 /* BookmarkedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedTableViewController.swift; sourceTree = "<group>"; };
+		3F5E7A271FCDEF4D005E1D63 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAnnotationView.swift; sourceTree = "<group>"; };
 		3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageDetail.xib; sourceTree = "<group>"; };
 		3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
@@ -141,6 +149,9 @@
 				3F7BB7931FA6365D0014DF9D /* MapViewController.swift */,
 				3F93A83E1FBFB6C5005F9A3E /* SettingsViewController.swift */,
 				3F820C0D1FBFD8A80077E969 /* ComposeViewController.swift */,
+				3F025EDD1FC4E77100825C2A /* SavedViewController.swift */,
+				3F5E7A231FCDE21F005E1D63 /* SentTableViewController.swift */,
+				3F5E7A251FCDE235005E1D63 /* BookmarkedTableViewController.swift */,
 				3F7BB7951FA6365D0014DF9D /* Main.storyboard */,
 				3F7BB79B1FA6365D0014DF9D /* Assets.xcassets */,
 				3F7BB79D1FA6365D0014DF9D /* LaunchScreen.storyboard */,
@@ -153,6 +164,7 @@
 				3F5EC3951FBB87A0005BAC0E /* MessageDetail.swift */,
 				3F5EC3931FBB809D005BAC0E /* MessageDetail.xib */,
 				3F5EC38F1FBB61A8005BAC0E /* MessageAnnotationView.swift */,
+				3F5E7A271FCDEF4D005E1D63 /* MessageTableViewCell.swift */,
 			);
 			path = Radar;
 			sourceTree = "<group>";
@@ -504,13 +516,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7BB7941FA6365D0014DF9D /* MapViewController.swift in Sources */,
+				3F5E7A241FCDE21F005E1D63 /* SentTableViewController.swift in Sources */,
 				3F5EC3901FBB61A8005BAC0E /* MessageAnnotationView.swift in Sources */,
 				3FA4F52E1FB643AF004BD92B /* Filter.swift in Sources */,
 				3F93A83F1FBFB6C5005F9A3E /* SettingsViewController.swift in Sources */,
 				3FA4F52C1FB6423A004BD92B /* Message.swift in Sources */,
 				3F820C0E1FBFD8A80077E969 /* ComposeViewController.swift in Sources */,
+				3F5E7A281FCDEF4D005E1D63 /* MessageTableViewCell.swift in Sources */,
 				3F7BB79A1FA6365D0014DF9D /* Radar.xcdatamodeld in Sources */,
 				3FA4F5321FB65274004BD92B /* MessageAnnotation.swift in Sources */,
+				3F5E7A261FCDE235005E1D63 /* BookmarkedTableViewController.swift in Sources */,
+				3F025EDE1FC4E77100825C2A /* SavedViewController.swift in Sources */,
 				3F5EC3961FBB87A0005BAC0E /* MessageDetail.swift in Sources */,
 				3F7BB7921FA6365D0014DF9D /* AppDelegate.swift in Sources */,
 			);
@@ -680,6 +696,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 89HN9782D7;
 				INFOPLIST_FILE = Radar/Info.plist;
@@ -687,6 +704,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mjr9r.bcg7mf.cs4720.Radar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -698,6 +716,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 89HN9782D7;
 				INFOPLIST_FILE = Radar/Info.plist;
@@ -705,6 +724,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mjr9r.bcg7mf.cs4720.Radar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
