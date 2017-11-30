@@ -9,15 +9,19 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseDatabase
 import CoreData
 
 private let kMessageAnnotationName = "kMessageAnnotationName"
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
 
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var quickdropField: UITextField!
     //let locationManager = CLLocationManager()
+    
+    var postData = [String]()
     
     lazy var locationManager: CLLocationManager = {
         [unowned self] in
@@ -45,6 +49,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         mapView.setRegion(viewRegion, animated: false)
         
+        fire_pull()
+        
         let message = Message(content: "A dachshund looking like a tiny hotdog, this is #2cute, come here ASAP peepz", duration: 50, distance: 50, date: Date(timeIntervalSinceReferenceDate: 532623600), filter: Filter.cute, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! + 0.01))
         let message2 = Message(content: "Someone just fell over and he is still trying to get up. Too funny OMG", duration: 50, distance: 50, date: Date(timeIntervalSinceReferenceDate: 532623200), filter: Filter.funny, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! - 0.01))
         
@@ -52,6 +58,42 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let messageAnnotation2 = MessageAnnotation(message: message2)
         
         mapView.addAnnotations([messageAnnotation, messageAnnotation2])
+    }
+    
+    func fire_pull(){
+        var ref: DatabaseReference!
+        var databaseHandle: DatabaseHandle?
+        ref = Database.database().reference().child("Messages")
+        
+        ref.observe(.value, with: { snapshot in
+//            print(snapshot.value!)
+            
+            let array:NSArray = snapshot.children.allObjects as NSArray
+            
+            for obj in array{
+                let snapshot:DataSnapshot = obj as! DataSnapshot
+                if let data = snapshot.value as? [String:Any]{
+                    let con = data["Content"] as! String
+                    let dat = data["Date"] as! String
+                    let dis = data["Distance"] as? Double
+                    let dur = data["Duration"] as? Double
+                    let fil = data["Filter"] as! String
+                    let lat = data["Latitiude"] as? Double
+                    let long = data["Longitude"] as? Double
+                    
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss ZZZ"
+                    let converted_date = dateFormatter.date(from: dat)
+                    
+                    let message = Message(content: con , duration: dur!, distance: dis!, date: converted_date!, filter: Filter(rawValue: fil)!, location: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                    
+                    let messageAnnotation = MessageAnnotation(message: message)
+                    self.mapView.addAnnotation(messageAnnotation)
+                }
+            }
+        
+        })
     }
     
     override func viewDidLoad() {
@@ -77,6 +119,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         print(String(describing: locationManager.location?.coordinate))
 
         mapView.center = view.center
+    
     }
     
     func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -216,11 +259,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         ])
     }
     
+    func fire_post(postcontent:String!, duration: Double!, distance: Double!, date: String!, filter: String!, latitude: Double!, longitude: Double!){
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        let parentRef = ref?.child("Messages").childByAutoId()
+        
+        parentRef?.child("Content").setValue(postcontent)
+        parentRef?.child("Duration").setValue(duration)
+        parentRef?.child("Distance").setValue(distance)
+        parentRef?.child("Date").setValue(date)
+        parentRef?.child("Filter").setValue(filter)
+        parentRef?.child("Latitiude").setValue(latitude)
+        parentRef?.child("Longitude").setValue(longitude)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         quickdropField.resignFirstResponder()
         if(quickdropField.text == "") {
             return false
         }
+        
+        fire_post(postcontent: quickdropField.text! ,duration: UserDefaults.standard.double(forKey: "qdDuration"), distance:UserDefaults.standard.double(forKey: "qdDistance"), date: Date().description, filter: Filter.cute.rawValue, latitude: (locationManager.location?.coordinate)!.latitude, longitude:(locationManager.location?.coordinate)!.longitude)
+        
         let message = Message(content: quickdropField.text!, duration: UserDefaults.standard.double(forKey: "qdDuration"), distance: UserDefaults.standard.double(forKey: "qdDistance"), date: Date(), filter: Filter.cute, location: (locationManager.location?.coordinate)!)
         let messageAnnotation = MessageAnnotation(message: message)
         mapView.addAnnotation(messageAnnotation)
