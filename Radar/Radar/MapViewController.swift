@@ -65,14 +65,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var databaseHandle: DatabaseHandle?
         ref = Database.database().reference().child("Messages")
         
-        ref.observe(.value, with: { snapshot in
+        ref.observeSingleEvent(of: .value, with: { snapshot in
 //            print(snapshot.value!)
             
             let array:NSArray = snapshot.children.allObjects as NSArray
             
             for obj in array{
                 let snapshot:DataSnapshot = obj as! DataSnapshot
-//                print(obj)
+                print(obj)
                 if let data = snapshot.value as? [String:Any]{
                     let con = data["Content"] as! String
 //                    print(data["Date"])
@@ -272,6 +272,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         parentRef?.child("Filter").setValue(filter)
         parentRef?.child("Latitiude").setValue(latitude)
         parentRef?.child("Longitude").setValue(longitude)
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -294,8 +295,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         fire_post(postcontent: quickdropField.text! ,duration: UserDefaults.standard.double(forKey: "qdDuration"), distance:UserDefaults.standard.double(forKey: "qdDistance"), date: final_date, filter: Filter.cute.rawValue, latitude: (locationManager.location?.coordinate)!.latitude, longitude:(locationManager.location?.coordinate)!.longitude)
         
        let message = Message(content: quickdropField.text!, duration: UserDefaults.standard.double(forKey: "qdDuration"), distance: UserDefaults.standard.double(forKey: "qdDistance"), date: Date(), filter: Filter.cute, location: (locationManager.location?.coordinate)!)
-//        let messageAnnotation = MessageAnnotation(message: message)
-//        mapView.addAnnotation(messageAnnotation)
+       let messageAnnotation = MessageAnnotation(message: message)
+       mapView.addAnnotation(messageAnnotation)
         quickdropField.text = ""
         
         // Store Message in CoreData
