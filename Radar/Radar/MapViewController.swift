@@ -89,8 +89,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     dateFormatter.timeZone = TimeZone.ReferenceType.local
                     let converted_date = dateFormatter.date(from: dat)
                     
-
-                    
                     let message = Message(content: con , duration: dur!, distance: dis!, date: converted_date!, filter: Filter(rawValue: fil)!, location: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
                     
                     let messageAnnotation = MessageAnnotation(message: message)

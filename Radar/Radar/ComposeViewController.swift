@@ -40,8 +40,14 @@ class ComposeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let row = filterPicker.selectedRow(inComponent: 0)
         let filter = Filter.filterValues[row]
         
+        let date_new = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        dateFormatter.timeZone = TimeZone.ReferenceType.local
+        let converted_date = dateFormatter.string(from: date_new )
+        let final_date = converted_date + " +0000"
         
-        fire_post(postcontent: messageTextField.text ,duration: messageDurationStepperCheck.value, distance:messageDistanceStepperCheck.value , date: Date().description, filter: filter.rawValue, latitude: (mapViewController.locationManager.location?.coordinate)!.latitude, longitude: (mapViewController.locationManager.location?.coordinate)!.longitude)
+        fire_post(postcontent: messageTextField.text ,duration: messageDurationStepperCheck.value, distance:messageDistanceStepperCheck.value , date: final_date, filter: filter.rawValue, latitude: (mapViewController.locationManager.location?.coordinate)!.latitude, longitude: (mapViewController.locationManager.location?.coordinate)!.longitude)
         
         let message = Message(content: messageTextField.text, duration: messageDurationStepperCheck.value, distance: messageDistanceStepperCheck.value, date: Date(), filter: filter, location: (mapViewController.locationManager.location?.coordinate)!)
         let messageAnnotation = MessageAnnotation(message: message)
