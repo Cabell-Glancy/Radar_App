@@ -36,6 +36,7 @@ class MessageDetail: UIView {
     public func setImage(filter: Filter) {
         if filter.rawValue == "CUTE" {
             filterImage.image = UIImage(named: "dog-icon")
+            backgroundArea.backgroundColor=UIColor.purple
         }
         if filter.rawValue == "LOL!" {
             filterImage.image = UIImage(named: "lol-icon")

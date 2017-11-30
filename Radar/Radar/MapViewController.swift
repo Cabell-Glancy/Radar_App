@@ -65,26 +65,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var databaseHandle: DatabaseHandle?
         ref = Database.database().reference().child("Messages")
         
-        ref.observe(.value, with: { snapshot in
+        ref.observeSingleEvent(of: .value, with: { snapshot in
 //            print(snapshot.value!)
             
             let array:NSArray = snapshot.children.allObjects as NSArray
             
             for obj in array{
                 let snapshot:DataSnapshot = obj as! DataSnapshot
+                print(obj)
                 if let data = snapshot.value as? [String:Any]{
                     let con = data["Content"] as! String
+//                    print(data["Date"])
                     let dat = data["Date"] as! String
+//                    print(dat)
                     let dis = data["Distance"] as? Double
                     let dur = data["Duration"] as? Double
                     let fil = data["Filter"] as! String
                     let lat = data["Latitiude"] as? Double
                     let long = data["Longitude"] as? Double
                     
-                    
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss ZZZ"
+                    dateFormatter.timeZone = TimeZone.ReferenceType.local
                     let converted_date = dateFormatter.date(from: dat)
+                    
+
                     
                     let message = Message(content: con , duration: dur!, distance: dis!, date: converted_date!, filter: Filter(rawValue: fil)!, location: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
                     
@@ -127,17 +132,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
         case .authorizedAlways:
             locationManager.startUpdatingLocation()
-            print("Made it to authorized Always")
             self.handleMap()
-            print("always authorize")
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
-            print("Made it to authorized when in use")
             self.handleMap()
-            print("authorized when in use")
         default:
             // User denied access, handle as appropriate
-            print("u suck")
+            print("default")
         }
     }
     
@@ -271,6 +272,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         parentRef?.child("Filter").setValue(filter)
         parentRef?.child("Latitiude").setValue(latitude)
         parentRef?.child("Longitude").setValue(longitude)
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -279,11 +281,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return false
         }
         
-        fire_post(postcontent: quickdropField.text! ,duration: UserDefaults.standard.double(forKey: "qdDuration"), distance:UserDefaults.standard.double(forKey: "qdDistance"), date: Date().description, filter: Filter.cute.rawValue, latitude: (locationManager.location?.coordinate)!.latitude, longitude:(locationManager.location?.coordinate)!.longitude)
+        let date_new = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        dateFormatter.timeZone = TimeZone.ReferenceType.local
+        let converted_date = dateFormatter.string(from: date_new )
+        let final_date = converted_date + " +0000"
         
-        let message = Message(content: quickdropField.text!, duration: UserDefaults.standard.double(forKey: "qdDuration"), distance: UserDefaults.standard.double(forKey: "qdDistance"), date: Date(), filter: Filter.cute, location: (locationManager.location?.coordinate)!)
-        let messageAnnotation = MessageAnnotation(message: message)
-        mapView.addAnnotation(messageAnnotation)
+//        print("--------------")
+//        print(final_date)
+//        print("--------------")
+        
+        fire_post(postcontent: quickdropField.text! ,duration: UserDefaults.standard.double(forKey: "qdDuration"), distance:UserDefaults.standard.double(forKey: "qdDistance"), date: final_date, filter: Filter.cute.rawValue, latitude: (locationManager.location?.coordinate)!.latitude, longitude:(locationManager.location?.coordinate)!.longitude)
+        
+       let message = Message(content: quickdropField.text!, duration: UserDefaults.standard.double(forKey: "qdDuration"), distance: UserDefaults.standard.double(forKey: "qdDistance"), date: Date(), filter: Filter.cute, location: (locationManager.location?.coordinate)!)
+       let messageAnnotation = MessageAnnotation(message: message)
+       mapView.addAnnotation(messageAnnotation)
         quickdropField.text = ""
         
         // Store Message in CoreData
