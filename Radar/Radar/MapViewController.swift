@@ -64,19 +64,35 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var databaseHandle: DatabaseHandle?
         ref = Database.database().reference().child("Messages")
         
-//        ref.observe(.value, with: { snapshot in
-//            print(snapshot.value)
-//            self.posts = []
-//            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-//                for snap in snapshots {
-//                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
-//                        let post = Post()
-//                        post.setValuesForKeysWithDictionary(postDict)
-//                        self.posts.append(post)
-//                    }
-//                }
-//            }
+        ref.observe(.value, with: { snapshot in
+//            print(snapshot.value!)
+            
+            let array:NSArray = snapshot.children.allObjects as NSArray
+            
+            for obj in array{
+                let snapshot:DataSnapshot = obj as! DataSnapshot
+                if let data = snapshot.value as? [String:Any]{
+                    let con = data["Content"] as! String
+                    let dat = data["Date"] as! String
+                    let dis = data["Distance"] as? Double
+                    let dur = data["Duration"] as? Double
+                    let fil = data["Filter"] as! String
+                    let lat = data["Latitiude"] as? Double
+                    let long = data["Longitude"] as? Double
+                    
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss ZZZ"
+                    let converted_date = dateFormatter.date(from: dat)
+                    
+                    let message = Message(content: con , duration: dur!, distance: dis!, date: converted_date!, filter: Filter(rawValue: fil)!, location: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                    
+                    let messageAnnotation = MessageAnnotation(message: message)
+                    self.mapView.addAnnotation(messageAnnotation)
+                }
+            }
         
+        })
     }
     
     override func viewDidLoad() {
