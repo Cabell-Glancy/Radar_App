@@ -43,6 +43,10 @@ class SettingsViewController: UITableViewController {
         UserDefaults.standard.set(Double(self.qdDistanceStepperCheck.value), forKey: "qdDistance")
         UserDefaults.standard.set(Double(self.qdDurationStepperCheck.value), forKey: "qdDuration")
         UserDefaults.standard.set(Double(self.personalRangeStepperCheck.value), forKey: "personalRange")
+        
+        let alert = UIAlertController(title: "Changes saved.", message: "Your settings have been updated.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Thanks!", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
