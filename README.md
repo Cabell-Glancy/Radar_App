@@ -1,4 +1,4 @@
-i# final-project-final-opal
+# final-project-final-opal
 
 Cabell Glancy (bcg7mf) <br>
 Matias Rietig (mjr9r)
