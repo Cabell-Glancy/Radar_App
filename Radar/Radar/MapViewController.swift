@@ -300,6 +300,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let calloutView = (Bundle.main.loadNibNamed("MessageDetail", owner: self, options: nil))?[0] as! MessageDetail
         let calloutViewFrame = calloutView.frame
         calloutView.frame = CGRect(x: -calloutViewFrame.size.width/2.23, y: -calloutViewFrame.size.height+10, width: 228, height: 213)
+        calloutView.layer.cornerRadius = 8.0
+        calloutView.clipsToBounds = true
         //calloutView.populateWithMessage(message: Message)
         if let messageannotation = view.annotation as? MessageAnnotation {
             calloutView.populateWithMessage(message: messageannotation.message)

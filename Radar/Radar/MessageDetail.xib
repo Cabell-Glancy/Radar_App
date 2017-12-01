@@ -54,22 +54,17 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="CtA-cI-kWr"/>
                     </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="bookmark_icon"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZ4-Km-nKm" userLabel="directionsButton">
-                    <rect key="frame" x="91" y="64" width="83" height="30"/>
-                    <state key="normal" title="Directions"/>
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="zB4-89-8fc" firstAttribute="leading" secondItem="xZ4-Km-nKm" secondAttribute="trailing" constant="8" symbolic="YES" id="0xO-0k-4fF"/>
                 <constraint firstItem="UHb-Kk-6G7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="9" id="2bK-GK-eWn"/>
                 <constraint firstItem="UHb-Kk-6G7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="4lu-xA-gBn"/>
                 <constraint firstItem="UHb-Kk-6G7" firstAttribute="leading" secondItem="Aq6-Qt-GPa" secondAttribute="leading" id="OX3-2n-wcX"/>
                 <constraint firstItem="7ai-N0-qEQ" firstAttribute="leading" secondItem="UHb-Kk-6G7" secondAttribute="trailing" constant="8" symbolic="YES" id="S9F-Hw-aie"/>
                 <constraint firstItem="Aq6-Qt-GPa" firstAttribute="top" secondItem="UHb-Kk-6G7" secondAttribute="bottom" constant="39" id="YOo-U4-F1V"/>
                 <constraint firstItem="Aq6-Qt-GPa" firstAttribute="top" secondItem="zB4-89-8fc" secondAttribute="bottom" constant="1" id="ZVO-e4-oG2"/>
-                <constraint firstItem="zB4-89-8fc" firstAttribute="top" secondItem="xZ4-Km-nKm" secondAttribute="top" id="gmL-QK-seF"/>
                 <constraint firstItem="zB4-89-8fc" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="gtK-SF-0xl"/>
                 <constraint firstItem="zB4-89-8fc" firstAttribute="trailing" secondItem="Aq6-Qt-GPa" secondAttribute="trailing" id="mKp-Kc-Wog"/>
                 <constraint firstItem="zB4-89-8fc" firstAttribute="top" secondItem="1IF-Yk-WES" secondAttribute="bottom" constant="8" symbolic="YES" id="oQ7-Pi-BaF"/>
@@ -83,7 +78,6 @@
             <connections>
                 <outlet property="backgroundArea" destination="N9w-N4-1pU" id="wzq-4Q-UoL"/>
                 <outlet property="bookmarkButton" destination="zB4-89-8fc" id="jx0-1F-vuX"/>
-                <outlet property="directionsButton" destination="xZ4-Km-nKm" id="ead-bp-BVU"/>
                 <outlet property="filterImage" destination="UHb-Kk-6G7" id="1GO-53-qc5"/>
                 <outlet property="filterTitle" destination="7ai-N0-qEQ" id="peC-8E-ndA"/>
                 <outlet property="messageContent" destination="Aq6-Qt-GPa" id="TaZ-SE-sV6"/>

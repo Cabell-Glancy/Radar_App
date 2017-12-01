@@ -15,7 +15,6 @@ class MessageDetail: UIView {
     @IBOutlet weak var filterImage: UIImageView!
     @IBOutlet weak var messageDate: UILabel!
     @IBOutlet weak var bookmarkButton: UIButton!
-    @IBOutlet weak var directionsButton: UIButton!
     @IBOutlet weak var messageContent: UILabel!
     @IBOutlet weak var backgroundArea: UIButton!
     weak var message: Message?
@@ -36,22 +35,34 @@ class MessageDetail: UIView {
     public func setImage(filter: Filter) {
         if filter.rawValue == "CUTE" {
             filterImage.image = UIImage(named: "dog-icon")
-            backgroundArea.backgroundColor=UIColor.purple
+            messageContent.backgroundColor = UIColor.init(red: 227/255, green: 141/255, blue: 1, alpha: 1)
+            backgroundArea.backgroundColor = UIColor.init(red: 227/255, green: 141/255, blue: 1, alpha: 1)
         }
         if filter.rawValue == "LOL!" {
             filterImage.image = UIImage(named: "lol-icon")
+            messageContent.backgroundColor = UIColor.init(red: 140/255, green: 1, blue: 119/255, alpha: 1)
+            backgroundArea.backgroundColor = UIColor.init(red: 140/255, green: 1, blue: 119/255, alpha: 1)
         }
         if filter.rawValue == "Aha!" {
             filterImage.image = UIImage(named: "education-icon")
+            messageContent.backgroundColor = UIColor.init(red: 1, green: 242/255, blue: 136/255, alpha: 1)
+            backgroundArea.backgroundColor = UIColor.init(red: 1, green: 242/255, blue: 136/255, alpha: 1)
         }
         if filter.rawValue == "Deal" {
             filterImage.image = UIImage(named: "deal-icon")
+            messageContent.backgroundColor = UIColor.init(red: 159/255, green: 156/255, blue: 1, alpha: 1)
+            backgroundArea.backgroundColor = UIColor.init(red: 159/255, green: 156/255, blue: 1, alpha: 1)
         }
         if filter.rawValue == "Secret" {
             filterImage.image = UIImage(named: "scavenger-icon")
+            messageContent.backgroundColor = UIColor.init(red: 1, green: 225/255, blue: 182/255, alpha: 1)
+            backgroundArea.backgroundColor = UIColor.init(red: 1, green: 225/255, blue: 182/255, alpha: 1)
+            
         }
         if filter.rawValue == "Event" {
             filterImage.image = UIImage(named: "event-icon")
+            messageContent.backgroundColor = UIColor.init(red: 1, green: 185/255, blue: 127/255, alpha: 1)
+            backgroundArea.backgroundColor = UIColor.init(red: 1, green: 185/255, blue: 127/255, alpha: 1)
         }
         
     }
