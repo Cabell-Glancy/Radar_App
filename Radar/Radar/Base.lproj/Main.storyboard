@@ -180,7 +180,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="eQA-RL-2ZX">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="radar-btn-white" id="0O8-yj-7mx">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="refreshButton:" destination="4WL-5h-8na" id="Dmr-bH-AB4"/>
                             </connections>
@@ -195,10 +195,10 @@
             </objects>
             <point key="canvasLocation" x="787.5" y="-441.54929577464787"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="b1Z-ja-djs">
             <objects>
-                <tabBarController id="0Ew-Ll-Asj" sceneMemberID="viewController">
+                <tabBarController id="0Ew-Ll-Asj" customClass="TabBarViewController" customModule="Radar" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="d3J-RB-I5u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -373,6 +373,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="S6Y-wa-6fk">
                         <barButtonItem key="rightBarButtonItem" title="Send" id="Cvq-94-7TJ">
+                            <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="messageSendButton:" destination="9YX-zZ-A2G" id="3i7-IA-w5v"/>
                             </connections>
@@ -460,6 +461,7 @@
                                                 </label>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minimumValue="0.5" maximumValue="5" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="96N-Oi-8zq">
                                                     <rect key="frame" x="210" y="7" width="94" height="29"/>
+                                                    <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="qdDistanceStepper:" destination="efq-dF-cNm" eventType="valueChanged" id="ZYq-qi-99s"/>
                                                     </connections>
@@ -511,6 +513,7 @@
                                                 </label>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minimumValue="0.5" maximumValue="72" stepValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hpT-eJ-XIq">
                                                     <rect key="frame" x="210" y="7" width="94" height="29"/>
+                                                    <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="qdDurationStepper:" destination="efq-dF-cNm" eventType="valueChanged" id="F9I-Iw-Cfv"/>
                                                     </connections>
@@ -557,6 +560,7 @@
                                                 </label>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minimumValue="0.5" maximumValue="5" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="f1v-oE-ulV">
                                                     <rect key="frame" x="210" y="7" width="94" height="29"/>
+                                                    <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="personalRange:" destination="efq-dF-cNm" eventType="valueChanged" id="O4V-eM-XOv"/>
                                                     </connections>
@@ -600,6 +604,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="wkZ-Fl-mV8">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Z8X-NH-P0b">
+                            <color key="tintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="saveSettings:" destination="efq-dF-cNm" id="M5K-Wy-RSf"/>
                             </connections>
@@ -623,7 +628,7 @@
         <scene sceneID="BSd-28-kuH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZHF-8g-mA9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="Hgv-On-6VI">
+                    <tabBarItem key="tabBarItem" title="Map" image="map-tabbar" id="Hgv-On-6VI">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -652,7 +657,7 @@
         <scene sceneID="aZp-Ih-Ce8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eyH-lg-loz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Compose" id="kui-5l-9Tk">
+                    <tabBarItem key="tabBarItem" title="Compose" image="compose-tabbar" id="kui-5l-9Tk">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -680,7 +685,7 @@
         <scene sceneID="BBz-6g-1QC">
             <objects>
                 <navigationController title="Settings" automaticallyAdjustsScrollViewInsets="NO" id="tLF-G3-vxj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="QBt-UK-aBO">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings-tabbar" id="QBt-UK-aBO">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -766,7 +771,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="compose-tabbar" width="30" height="30"/>
+        <image name="map-tabbar" width="30" height="30"/>
         <image name="mapPin" width="30" height="30"/>
         <image name="radar-btn-white" width="37" height="37"/>
+        <image name="settings-tabbar" width="30" height="30"/>
     </resources>
 </document>
