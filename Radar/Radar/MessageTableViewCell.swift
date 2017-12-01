@@ -15,6 +15,7 @@ class MessageTableViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
+    weak var cellMessage : Message?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,7 @@ class MessageTableViewCell: UITableViewCell, MKMapViewDelegate {
     }
     
     func showLocation(message: Message) {
+        cellMessage = message
         let long = message.location.longitude
         let lat = message.location.latitude
         let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -34,8 +36,7 @@ class MessageTableViewCell: UITableViewCell, MKMapViewDelegate {
         let annotation = MessageAnnotation(message: message)
         mapView.addAnnotation(annotation)
         
-        mapView?.setRegion(viewRegion, animated: false)
-        
+        mapView.setRegion(viewRegion, animated: false)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -83,6 +84,10 @@ class MessageTableViewCell: UITableViewCell, MKMapViewDelegate {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
 
 }
