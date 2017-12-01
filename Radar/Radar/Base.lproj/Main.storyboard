@@ -128,16 +128,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIK-Sj-HZy">
-                                <rect key="frame" x="7" y="72" width="63" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="sbd-vd-gpn"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="radar-scan-btn"/>
-                                <connections>
-                                    <action selector="refreshButton:" destination="4WL-5h-8na" eventType="touchUpInside" id="Yl6-AR-lZv"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -147,12 +137,9 @@
                             <constraint firstItem="EGs-Ll-nqW" firstAttribute="top" secondItem="YWG-oG-tI0" secondAttribute="top" constant="198" id="8wW-ou-eAT"/>
                             <constraint firstItem="EGs-Ll-nqW" firstAttribute="top" secondItem="YWG-oG-tI0" secondAttribute="top" constant="413" id="HZ5-0Q-xM7"/>
                             <constraint firstItem="drK-vv-90t" firstAttribute="leading" secondItem="hsv-Au-t3n" secondAttribute="leading" id="J8R-Wu-N8d"/>
-                            <constraint firstItem="YWG-oG-tI0" firstAttribute="trailing" secondItem="UIK-Sj-HZy" secondAttribute="trailing" constant="250" id="JTR-Xs-84D"/>
-                            <constraint firstItem="UIK-Sj-HZy" firstAttribute="top" secondItem="YWG-oG-tI0" secondAttribute="top" constant="8" id="Mnp-4J-XLr"/>
                             <constraint firstItem="YWG-oG-tI0" firstAttribute="trailing" secondItem="EGs-Ll-nqW" secondAttribute="trailing" constant="16" id="Nxy-Pl-MhO"/>
                             <constraint firstAttribute="bottomMargin" secondItem="drK-vv-90t" secondAttribute="bottom" constant="-12" id="U5f-KX-qqV"/>
                             <constraint firstItem="YWG-oG-tI0" firstAttribute="bottom" secondItem="EGs-Ll-nqW" secondAttribute="bottom" constant="12" id="V1n-Rg-tvp"/>
-                            <constraint firstItem="UIK-Sj-HZy" firstAttribute="leading" secondItem="YWG-oG-tI0" secondAttribute="leading" constant="7" id="W7E-9W-8f3"/>
                             <constraint firstItem="EGs-Ll-nqW" firstAttribute="centerX" secondItem="drK-vv-90t" secondAttribute="centerX" id="XSr-Fa-NUO"/>
                             <constraint firstAttribute="trailing" secondItem="drK-vv-90t" secondAttribute="trailing" id="cj6-4C-mlL"/>
                             <constraint firstItem="YWG-oG-tI0" firstAttribute="trailing" secondItem="EGs-Ll-nqW" secondAttribute="trailing" constant="20" id="fXp-40-mZ6"/>
@@ -191,7 +178,14 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="eQA-RL-2ZX"/>
+                    <navigationItem key="navigationItem" id="eQA-RL-2ZX">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="radar-btn-white" id="0O8-yj-7mx">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="refreshButton:" destination="4WL-5h-8na" id="Dmr-bH-AB4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="drK-vv-90t" id="WIq-fe-xaW"/>
                         <outlet property="quickdropField" destination="EGs-Ll-nqW" id="xFO-Rw-7YY"/>
@@ -773,6 +767,6 @@
     </scenes>
     <resources>
         <image name="mapPin" width="30" height="30"/>
-        <image name="radar-scan-btn" width="500" height="500"/>
+        <image name="radar-btn-white" width="37" height="37"/>
     </resources>
 </document>

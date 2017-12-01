@@ -16,12 +16,12 @@ private let kMessageAnnotationName = "kMessageAnnotationName"
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
 
-    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var quickdropField: UITextField!
     //let locationManager = CLLocationManager()
     
-    @IBAction func refreshButton(_ sender: UIButton) {
+    
+    @IBAction func refreshButton(_ sender: UIBarButtonItem) {
         self.refresh()
     }
     
