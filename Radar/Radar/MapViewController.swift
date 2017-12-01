@@ -111,13 +111,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     }
                     // DURATION FILTER
                     let duration = Date().timeIntervalSince(converted_date!)
-                    print("current time: " + String(describing: Date()))
-                    print("message time: " + String(describing: converted_date!))
-                    //let duration = DateInterval(start: converted_date!, end: Date())
                     print(String(duration))
                     print(String(duration/3600))
                     
-                    print("MESSAGEDURATION: " + String(describing: messageAnnotation.message.duration))
                     if(!(duration/3600 > messageAnnotation.message.duration)) {
                         withinTime = true
                     }
@@ -125,7 +121,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     if(withinTime && withinRange) {
                         self.mapView.addAnnotation(messageAnnotation)
                     }
-                    print("Distance: " + String(distance))
                     
 
                     
@@ -144,12 +139,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         if CLLocationManager.authorizationStatus() != .authorizedAlways     // Check authorization for location tracking
         {
-            print("I am running")
             locationManager.requestWhenInUseAuthorization()
             locationManager.requestAlwaysAuthorization() // LocationManager will callbackdidChange... once user responds
-            print("WOT")
         } else {
-            print("I am also running")
             locationManager.startUpdatingLocation()
         }
         
@@ -404,11 +396,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        moveTextField(textField: quickdropField, moveDistance: -250, up: true)
+        moveTextField(textField: quickdropField, moveDistance: -200, up: true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        moveTextField(textField: quickdropField, moveDistance: -250, up: false)
+        moveTextField(textField: quickdropField, moveDistance: -200, up: false)
     }
     
     func moveTextField(textField: UITextField, moveDistance: Int, up: Bool) {
