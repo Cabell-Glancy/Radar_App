@@ -107,7 +107,7 @@ class ComposeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         filterPicker.delegate = self
         let y = filterPicker.frame.origin.y
         filterPicker.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        filterPicker.frame = CGRect(x: -50, y: y, width: view.frame.width + 100, height: 140)
+        filterPicker.frame = CGRect(x: 0, y: y, width: view.frame.width + 150, height: 140)
         filterPicker.selectRow(2, inComponent: 0, animated: true)
         
         // Prepopulate Labels
