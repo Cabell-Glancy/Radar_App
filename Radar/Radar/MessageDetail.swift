@@ -58,7 +58,26 @@ class MessageDetail: UIView {
     
     @objc public func bookmarkMessage(_ sender: UIButton!) {
         // Store Message in CoreData
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let request = NSFetchRequest<NSManagedObject>(entityName: "StoreMessage")
+        //request.predicate = NSPredicate(format: "message == %@", message!)
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        do {
+            let result = try managedContext.fetch(request)
+            for resultmessage in result {
+                let resultmessage = resultmessage.value(forKey: "message") as! Message
+                if(resultmessage.content == message!.content) {
+                    let alert = UIAlertController(title: "We get it, you like this.", message: "You cannot bookmark the same message twice.", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.default, handler: nil))
+                    UIApplication.shared.windows[0].rootViewController?.present(alert, animated: true, completion: nil)
+                    return
+                }
+            }
+        }
+        catch {
+            
+        }
         let context = appDelegate.persistentContainer.viewContext
         let messageTest = NSEntityDescription.insertNewObject(forEntityName: "StoreMessage", into: context)
         messageTest.setValue(message, forKey: "message")
@@ -72,6 +91,5 @@ class MessageDetail: UIView {
         }    }
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 }

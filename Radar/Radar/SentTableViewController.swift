@@ -13,6 +13,7 @@ import MapKit
 class SentTableViewController: UITableViewController {
     
     var messages : [NSManagedObject] = []
+    var mapviews : [MKMapView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,7 @@ class SentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageTableViewCell
         let message = messages[indexPath.row].value(forKey: "message") as! Message
+
         cell.contentLabel.text = message.content
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -81,7 +83,9 @@ class SentTableViewController: UITableViewController {
  //       let barViewControllers = self.tabBarController?.viewControllers
  //       let mapViewController = barViewControllers![0].childViewControllers[0] as! MapViewController
  
+        print(indexPath.row)
         cell.showLocation(message: message)
+        
         return cell
     }
     
