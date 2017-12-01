@@ -21,6 +21,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var quickdropField: UITextField!
     //let locationManager = CLLocationManager()
     
+    @IBAction func refreshButton(_ sender: UIButton) {
+        self.refresh()
+    }
+    
     var postData = [String]()
     
     lazy var locationManager: CLLocationManager = {
@@ -85,14 +89,47 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     let long = data["Longitude"] as? Double
                     
                     let dateFormatter = DateFormatter()
+                    print("dat: " + dat)
                     dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss ZZZ"
-                    dateFormatter.timeZone = TimeZone.ReferenceType.local
+                    dateFormatter.timeZone = TimeZone(identifier: "GMT")
                     let converted_date = dateFormatter.date(from: dat)
                     
                     let message = Message(content: con , duration: dur!, distance: dis!, date: converted_date!, filter: Filter(rawValue: fil)!, location: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
                     
                     let messageAnnotation = MessageAnnotation(message: message)
-                    self.mapView.addAnnotation(messageAnnotation)
+                    
+                    // DISTANCE FILTER TEST
+                    let distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate((self.locationManager.location?.coordinate)!), MKMapPointForCoordinate(messageAnnotation.coordinate))/1609.344 // get distance in miles
+                    print("COMPARISON: " + String(distance) + "vs. " + String(UserDefaults.standard.double(forKey: "personalRange")))
+                    print(distance > UserDefaults.standard.double(forKey: "personalRange"))
+                    print(distance > messageAnnotation.message.distance)
+                    var withinRange = false
+                    var withinTime = false
+                    if(!(distance > UserDefaults.standard.double(forKey: "personalRange")) && !(distance > messageAnnotation.message.distance)) {
+                        withinRange = true
+                        //self.mapView.addAnnotation(messageAnnotation)
+                    }
+                    // DURATION FILTER
+                    let duration = Date().timeIntervalSince(converted_date!)
+                    print("current time: " + String(describing: Date()))
+                    print("message time: " + String(describing: converted_date!))
+                    //let duration = DateInterval(start: converted_date!, end: Date())
+                    print(String(duration))
+                    print(String(duration/3600))
+                    
+                    print("MESSAGEDURATION: " + String(describing: messageAnnotation.message.duration))
+                    if(!(duration/3600 > messageAnnotation.message.duration)) {
+                        withinTime = true
+                    }
+                    
+                    if(withinTime && withinRange) {
+                        self.mapView.addAnnotation(messageAnnotation)
+                    }
+                    print("Distance: " + String(distance))
+                    
+
+                    
+                    //self.mapView.addAnnotation(messageAnnotation)
                 }
             }
         
@@ -162,6 +199,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    func refresh() {
+        let annotations = self.mapView.annotations
+        self.mapView.removeAnnotations(annotations)
+        self.fire_pull()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if(!UserDefaults.standard.bool(forKey: "isQdEnabled")) {
@@ -170,6 +213,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         else {
             self.quickdropField.isHidden = false
         }
+        self.refresh()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -177,7 +221,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return nil
         }
 
-        let reuseId = "marker"
+        var reuseId = "marker"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MessageAnnotationView
         if annotationView == nil {
             annotationView = MessageAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -185,21 +229,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             switch (messageanno.message.filter.rawValue) {
             case "CUTE":
+                reuseId = "CUTE"
                 annotationView?.markerTintColor = UIColor.purple
                 annotationView?.glyphImage = UIImage(named: "dog-icon")
             case "LOL!":
+                reuseId = "LOL!"
                 annotationView?.markerTintColor = UIColor.green
                 annotationView?.glyphImage = UIImage(named: "lol-icon")
             case "Aha!":
+                reuseId = "Aha!"
                 annotationView?.markerTintColor = UIColor.yellow
                 annotationView?.glyphImage = UIImage(named: "education-icon")
             case "Secret":
+                reuseId = "Secret"
                 annotationView?.markerTintColor = UIColor.brown
                 annotationView?.glyphImage = UIImage(named: "scavenger-icon")
             case "Deal":
+                reuseId = "Deal"
                 annotationView?.markerTintColor = UIColor.blue
                 annotationView?.glyphImage = UIImage(named: "deal-icon")
             case "Event":
+                reuseId = "Event"
                 annotationView?.markerTintColor = UIColor.orange
                 annotationView?.glyphImage = UIImage(named: "event-icon")
             default:
@@ -208,7 +258,37 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotationView?.canShowCallout = true
         }
         else {
-            annotationView!.annotation = annotation
+            annotationView = MessageAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            let messageanno = annotationView!.annotation as! MessageAnnotation
+            
+            switch (messageanno.message.filter.rawValue) {
+            case "CUTE":
+                reuseId = "CUTE"
+                annotationView?.markerTintColor = UIColor.purple
+                annotationView?.glyphImage = UIImage(named: "dog-icon")
+            case "LOL!":
+                reuseId = "LOL!"
+                annotationView?.markerTintColor = UIColor.green
+                annotationView?.glyphImage = UIImage(named: "lol-icon")
+            case "Aha!":
+                reuseId = "Aha!"
+                annotationView?.markerTintColor = UIColor.yellow
+                annotationView?.glyphImage = UIImage(named: "education-icon")
+            case "Secret":
+                reuseId = "Secret"
+                annotationView?.markerTintColor = UIColor.brown
+                annotationView?.glyphImage = UIImage(named: "scavenger-icon")
+            case "Deal":
+                reuseId = "Deal"
+                annotationView?.markerTintColor = UIColor.blue
+                annotationView?.glyphImage = UIImage(named: "deal-icon")
+            case "Event":
+                reuseId = "Event"
+                annotationView?.markerTintColor = UIColor.orange
+                annotationView?.glyphImage = UIImage(named: "event-icon")
+            default:
+                annotationView?.markerTintColor = UIColor(displayP3Red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            }
         }
         return annotationView
     }
@@ -282,7 +362,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let date_new = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        dateFormatter.timeZone = TimeZone.ReferenceType.local
+        dateFormatter.timeZone = TimeZone(identifier: "GMT")
         let converted_date = dateFormatter.string(from: date_new )
         let final_date = converted_date + " +0000"
         
