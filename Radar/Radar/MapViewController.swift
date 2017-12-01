@@ -213,7 +213,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         else {
             self.quickdropField.isHidden = false
         }
-        self.refresh()
+        if CLLocationManager.authorizationStatus() != .authorizedAlways
+        {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
+        } else {
+            self.refresh()
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
