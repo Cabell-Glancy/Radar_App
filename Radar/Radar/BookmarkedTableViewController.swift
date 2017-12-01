@@ -72,6 +72,7 @@ class BookmarkedTableViewController: UITableViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
+        dateFormatter.timeZone = TimeZone.ReferenceType.local
         cell.dateLabel.text = dateFormatter.string(from: message.date)
         let findButton = cell.findButton
         findButton?.tag = indexPath.row
