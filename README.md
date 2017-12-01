@@ -1,4 +1,4 @@
-# final-project-final-opal
+i# final-project-final-opal
 
 Cabell Glancy (bcg7mf) <br>
 Matias Rietig (mjr9r)
@@ -42,4 +42,4 @@ No specific usage instructions required. But here's how to make pancakes:
 - Debugging for mobile is a slower process in some ways since, especially for more sophisticated features, it requires pushing and installing the app to the device which can take a long time. Also, sometimes the error messages that Xcode throws are rather vague and require a lot of research and trial & error to solve.
 - Firebase is great for testing and playing around with different data while running the app because everything happens in realtime. The hardest part is parsing the data correctly to get reading and writing to the app to work correctly. The syntax that is used to define methods in Firebase is anything but intuitive.
 - CoreData and UserDefaults are incredibly easy to implement and Swift/Xcode does a great job in abstracting the "annoying" parts of implementing a persistent SQLite data storage for developers.
-- Using the MapView and especially understanging how annotations work is really hard to begin with. Again, once you wrap your head around it though, the possibilites of customization are sheer endless.
+- Using the MapView and especially understanding how annotations work is really hard to begin with. Again, once you wrap your head around it though, the possibilities of customization are sheer endless.
