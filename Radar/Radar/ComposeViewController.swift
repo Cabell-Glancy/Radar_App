@@ -43,7 +43,7 @@ class ComposeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let date_new = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        dateFormatter.timeZone = TimeZone.ReferenceType.default
+        dateFormatter.timeZone = TimeZone(identifier: "GMT")
         let converted_date = dateFormatter.string(from: date_new )
         let final_date = converted_date + " +0000"
         

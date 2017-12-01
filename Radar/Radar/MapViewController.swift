@@ -55,13 +55,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         fire_pull()
         
-        let message = Message(content: "A dachshund looking like a tiny hotdog, this is #2cute, come here ASAP peepz", duration: 50, distance: 50, date: Date(timeIntervalSinceReferenceDate: 532623600), filter: Filter.cute, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! + 0.01))
-        let message2 = Message(content: "Someone just fell over and he is still trying to get up. Too funny OMG", duration: 50, distance: 50, date: Date(timeIntervalSinceReferenceDate: 532623200), filter: Filter.funny, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! - 0.01))
-        
-        let messageAnnotation = MessageAnnotation(message: message)
-        let messageAnnotation2 = MessageAnnotation(message: message2)
-        
-        mapView.addAnnotations([messageAnnotation, messageAnnotation2])
+//        let message = Message(content: "A dachshund looking like a tiny hotdog, this is #2cute, come here ASAP peepz", duration: 50, distance: 50, date: Date(timeIntervalSinceReferenceDate: 532623600), filter: Filter.cute, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! + 0.01))
+//        let message2 = Message(content: "Someone just fell over and he is still trying to get up. Too funny OMG", duration: 50, distance: 50, date: Date(timeIntervalSinceReferenceDate: 532623200), filter: Filter.funny, location: CLLocationCoordinate2D(latitude: (locationManager.location?.coordinate.latitude)! + 0.01, longitude: (locationManager.location?.coordinate.longitude)! - 0.01))
+//
+//        let messageAnnotation = MessageAnnotation(message: message)
+//        let messageAnnotation2 = MessageAnnotation(message: message2)
+//
+//        mapView.addAnnotations([messageAnnotation, messageAnnotation2])
     }
     
     func fire_pull(){
@@ -212,6 +212,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         } else {
             self.refresh()
         }
+        //self.refresh()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
